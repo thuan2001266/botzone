@@ -127,11 +127,11 @@ function Display({ type, data }: info) {
                 >
                     {data.map((product) => (
                         <Product
-                            key={product._id}
-                            id={product._id}
-                            image={product.img}
+                            key={product.id}
+                            id={product.id}
+                            image={product.img[0]}
                             name={product.name}
-                            price={product.price}
+                            price={product.price[0]}
                             type={product.type}
                         />
                     ))}

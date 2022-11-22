@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Display.js", "components/Display.js", "pages/api/mongotest.js", "pages/iphone.js", "pages/detail/[detail].js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Display.js", "components/Display.js", "pages/api/mongotest.js", "pages/iphone.js", "pages/detail/[detail].js", "pages/search.js"],
   "exclude": ["node_modules"]
 }

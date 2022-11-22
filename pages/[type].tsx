@@ -8,9 +8,10 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Products } from "../interface";
 
 export const getStaticPaths = async () => {
-    const res = await fetch("http://localhost:3000/api/products");
+    const res = await fetch("http://localhost:8080/api/product");
     const data = await res.json();
-    const temppaths = data.message.map((a) => {
+
+    const temppaths = data.data.map((a) => {
         return a.type;
     });
 
@@ -53,14 +54,14 @@ export const getStaticProps = async (context) => {
             break;
     }
 
-    const res = await fetch(`http://localhost:3000/api/products/` + type);
+    const res = await fetch(`http://localhost:8080/api/product/type/` + type);
     const data = await res.json();
 
-    let typeList = [...new Set(data.message.map((dat: Products) => dat.model))];
+    let typeList = [...new Set(data.data.map((dat: Products) => dat.model))];
 
     return {
         props: {
-            product: data.message,
+            product: data.data,
             typeList: typeList,
             productType: productType,
         },
@@ -179,11 +180,15 @@ function type({ product, typeList, productType }) {
                             {productData &&
                                 productData.map((product) => (
                                     <ProductGrid
-                                        key={product._id}
-                                        id={product._id}
-                                        image={product.img}
-                                        name={product.name}
-                                        price={product.price}
+                                        key={product.id}
+                                        id={product.id}
+                                        image={product.img[0]}
+                                        name={
+                                            product.name +
+                                            " " +
+                                            product.option[0]
+                                        }
+                                        price={product.price[0]}
                                         type={product.type}
                                     />
                                 ))}

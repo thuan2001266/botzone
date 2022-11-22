@@ -12,7 +12,7 @@ function Product({ id, image, name, price, type }) {
                     <div className="">
                         <img className="object-contain" src={image} alt="" />
                     </div>
-                    <div className="py-7">{name}</div>
+                    <div className="py-7 w-5/6 text-center">{name}</div>
                     <div>{price}₫</div>
                 </div>
             </div>

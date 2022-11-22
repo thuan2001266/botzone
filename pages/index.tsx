@@ -4,13 +4,14 @@ import Carousel from "../components/Carousel";
 import Display from "../components/Display";
 import Header from "../components/Header";
 import Intro from "../components/Intro";
+import Layout from "../components/Layout";
 import TypeList from "../components/TypeList";
 import { Products } from "../interface";
 
 export async function getServerSideProps() {
-    const result = await fetch(`http://localhost:3000/api/products`);
+    const result = await fetch(`http://localhost:8080/api/product`);
     const data = await result.json();
-    return { props: { products: data.message } };
+    return { props: { products: data.data } };
 }
 
 const Home: NextPage = ({ products }) => {
@@ -27,7 +28,7 @@ const Home: NextPage = ({ products }) => {
         return e.type == "watch";
     });
     return (
-        <div>
+        <Layout>
             <Head>
                 <title>BotZone</title>
                 <meta
@@ -36,15 +37,15 @@ const Home: NextPage = ({ products }) => {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
+
             <Carousel />
             <Intro />
             <TypeList />
             <Display type="iPhone" data={iphone} />
             <Display type="Macbook" data={macbook} />
             <Display type="iPad" data={ipad} />
-            <Display type="Watch" data={watch} />
-        </div>
+            {/* <Display type="Watch" data={watch} /> */}
+        </Layout>
     );
 };
 

@@ -1,13 +1,16 @@
 import Head from "next/head";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { ProductItem } from "../../interface";
+import { useStore, actions } from "../../store";
 export const getStaticPaths = async () => {
-    const res = await fetch("http://localhost:3000/api/products");
+    const res = await fetch("http://localhost:8080/api/product");
     const data = await res.json();
-    const paths = data.message.map((a) => {
+    const paths = data.data.map((a) => {
         return {
             params: {
-                id: a._id.toString(),
+                id: a.id.toString(),
             },
         };
     });
@@ -19,14 +22,22 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
     const id = context.params.id;
-    const res = await fetch("http://localhost:3000/api/detail/" + id);
+    const res = await fetch("http://localhost:8080/api/product/" + id);
     const data = await res.json();
     return {
-        props: { product: data.message[0] },
+        props: { product: data.data[0] },
     };
 };
 
 function detail({ product }: ProductItem) {
+    const [state, dispatch] = useStore();
+    const [storage, setStorage] = useState(0);
+    const [color, setColor] = useState(0);
+    const addToCard = () => {
+        dispatch(actions.setCart(product.id));
+    };
+    console.log(state.cart);
+
     return (
         <Layout>
             <Head>
@@ -41,40 +52,104 @@ function detail({ product }: ProductItem) {
                 <div className="w-4/5 m-auto flex pt-5">
                     <div className="w-1/2 mr-3 relative">
                         <div className="sticky">
-                            <img
-                                src="https://cdn.tgdd.vn/Products/Images/42/251192/s16/iphone_14_pro_max_pdp_position-1_space_black_color-1-650x650.jpg"
-                                alt=""
-                            />
+                            <img src={product.img[color]} alt="" />
                         </div>
                         <div></div>
                     </div>
                     <div className="w-1/2 ml-2">
-                        <h1>{product.name}</h1>
-                        <h2>{product.price}</h2>
+                        <h1 className="text-4xl font-extrabold">
+                            {product.name}
+                        </h1>
+                        <h2 className="text-3xl font-bold mt-3">
+                            {product.price[0]}₫
+                        </h2>
                         <div>
-                            <p>Dung lượng</p>
+                            <div className="my-3 flex">
+                                Dung lượng:
+                                <div className="font-semibold ml-2">
+                                    {product.option[storage]}
+                                </div>
+                            </div>
                             <div>
-                                <ul>
+                                <ul className="space-x-2 flex">
                                     {product.option.map((opt) => (
-                                        <li key={opt}>{opt}</li>
+                                        <li
+                                            onClick={() =>
+                                                setStorage(
+                                                    product.option.indexOf(opt)
+                                                )
+                                            }
+                                            className={
+                                                product.option.indexOf(opt) ==
+                                                storage
+                                                    ? "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#2f3033]"
+                                                    : "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#4c4c53] text-[#a9a9a9]"
+                                            }
+                                            key={opt}
+                                        >
+                                            {opt}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
                         </div>
                         <div>
-                            <p>Màu</p>
+                            <div className="my-3 flex">
+                                Màu:
+                                <div className="font-semibold ml-2">
+                                    {product.color[color]}
+                                </div>
+                            </div>
                             <div>
-                                <ul>
+                                <ul className="space-x-2 flex">
                                     {product.color.map((opt) => (
-                                        <li>{opt}</li>
+                                        <li
+                                            onClick={() =>
+                                                setColor(
+                                                    product.color.indexOf(opt)
+                                                )
+                                            }
+                                            className={
+                                                product.color.indexOf(opt) ==
+                                                color
+                                                    ? "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#2f3033]"
+                                                    : "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#4c4c53] text-[#a9a9a9]"
+                                            }
+                                        >
+                                            {" "}
+                                            {opt}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
                         </div>
-                        <div>
-                            Khuyến mãi Giá và khuyến mãi dự kiến áp dụng đến
-                            23:59 | 25/10
-                            <ol>
+
+                        {state.cart.includes(product.id) ? (
+                            <Link href="/cart">
+                                <div className="w-[100%] flex items-center justify-center py-4 rounded-2xl mt-3 bg-[#0071e3] cursor-pointer ">
+                                    <div className="text-lg font-semibold ">
+                                        Xem giỏ hàng
+                                    </div>
+                                </div>
+                            </Link>
+                        ) : (
+                            <div
+                                className="w-[100%] flex items-center justify-center py-4 rounded-2xl mt-3 bg-[#0071e3] cursor-pointer "
+                                onClick={addToCard}
+                            >
+                                <div className="text-lg font-semibold ">
+                                    Mua ngay
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="bg-[#2f3033] p-6 my-5 rounded-2xl">
+                            <h5 className="text-lg font-black">Khuyến mãi</h5>
+                            <h6 className="text-sm mb-2">
+                                Giá và khuyến mãi dự kiến áp dụng đến 23:59 |
+                                25/10
+                            </h6>
+                            <ol className="list-disc mx-3">
                                 <li>
                                     Thu cũ Đổi mới: Giảm đến 1.5 triệu (Tuỳ
                                     model máy cũ, không áp dụng kèm giảm giá qua
@@ -112,14 +187,11 @@ function detail({ product }: ProductItem) {
                                     tiết)
                                 </li>
                             </ol>
-                            <span>
+                            <span className="text-sm mt-4">
                                 (*) Giá hoặc khuyến mãi không áp dụng trả góp
                                 lãi suất đặc biệt (0%, 0.5%, 1%)
                             </span>
                         </div>
-                        <div>uu dai</div>
-                        <div>mua</div>
-                        <div>info</div>
                     </div>
                 </div>
                 <div></div>

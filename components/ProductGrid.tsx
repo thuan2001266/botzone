@@ -12,7 +12,7 @@ function ProductGrid({ id, image, name, price, type }) {
                     <div className="">
                         <img className="object-contain" src={image} alt="" />
                     </div>
-                    <div className="py-7">{name}</div>
+                    <div className="text-center py-7 w-5/6">{name}</div>
                     <div>{price}₫</div>
                 </div>
             </div>
