@@ -3,7 +3,6 @@ import png from "../assets/pngs";
 function TypeList() {
     let pngs = Object.values(png);
     return (
-        //use grid instead of flex, not done yet
         <div className="grid grid-cols-2 lg:grid-cols-4 items-center justify-center mt-10 w-4/5 m-auto">
             <Link href={"/iphone"}>
                 <div className="flex flex-col items-center pt-7 pb-4 pl-4 pr-4 bg-[#323232] rounded-lg m-2 ">

@@ -11,6 +11,12 @@ export interface Products {
     model: string;
 }
 
+export interface FetchData {
+    code: number;
+    message: string;
+    data: any;
+}
+
 export interface ProductAndQuantity {
     product: Products;
     quantity: number;

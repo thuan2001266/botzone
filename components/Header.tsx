@@ -1,12 +1,17 @@
 import SearchIcon from "@mui/icons-material/Search";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStore, actions } from "../store";
 import { useRouter } from "next/router";
 function Header() {
     const router = useRouter();
+    const [userMenu, setUserMenu] = useState(false);
+    const [history, setHistory] = useState(false);
+    const [historyData, setHistoryData] = useState();
+
     const [state, dispatch] = useStore();
     const [searchVisibility, setSearchVisibility] = useState(false);
     const searchClick = () => {
@@ -17,6 +22,39 @@ function Header() {
         dispatch(actions.setReload(!state.reload));
         router.push("/search");
     };
+
+    const optionOoO = () => {
+        setUserMenu((prev) => !prev);
+        if (history == true) {
+            setHistory(false);
+        }
+    };
+
+    useEffect(() => {
+        if (state.info != "") {
+            const fetchResult = async () => {
+                const result = await fetch(
+                    `http://localhost:8080/api/receipt/` + state.info.sub,
+                    {
+                        method: "GET",
+                        mode: "cors",
+                        credentials: "same-origin",
+                        headers: {
+                            accept: "application/json",
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                    }
+                );
+                const data = await result.json();
+                console.log(data.data);
+
+                setHistoryData(data.data);
+            };
+
+            fetchResult();
+        }
+    }, []);
+
     return (
         <div className="bg-[#101010] ">
             <div className="relative">
@@ -115,6 +153,97 @@ function Header() {
                                 )}
                             </div>
                         </Link>
+
+                        <div>
+                            {state.token != "" ? (
+                                <div className="flex space-x-2 relative">
+                                    <div className="flex" onClick={optionOoO}>
+                                        <div>
+                                            Xin chào{" "}
+                                            <span className="text-lg font-bold cursor-pointer">
+                                                {state.info.sub}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <ArrowDropDownIcon />
+                                        </div>
+                                    </div>
+                                    {userMenu && (
+                                        <div className="absolute top-[110%] right-0 bg-[#3e3e3f] rounded-2xl px-5 mt-3 z-10 w-max">
+                                            <ul className="space-y-2 py-3 text-white">
+                                                {state.info.roles.includes(
+                                                    "ROLE_ADMIN"
+                                                ) ? (
+                                                    <Link href={"/manage"}>
+                                                        <li className="cursor-pointer">
+                                                            Quản lý
+                                                        </li>
+                                                    </Link>
+                                                ) : (
+                                                    <li
+                                                        className="cursor-pointer"
+                                                        onClick={() =>
+                                                            setHistory(
+                                                                (prev) => !prev
+                                                            )
+                                                        }
+                                                    >
+                                                        Lịch sử mua hàng
+                                                    </li>
+                                                )}
+                                                <li
+                                                    className="cursor-pointer"
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            actions.setToken("")
+                                                        )
+                                                    }
+                                                >
+                                                    Đăng xuất
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )}
+                                    {history && (
+                                        <div className="absolute left-[-320px] top-11 w-[300px] z-50 bg-[#3e3e3f] rounded-2xl pb-3 ">
+                                            {historyData.map((e) => (
+                                                <div className="px-3 pt-2">
+                                                    <div>
+                                                        <span className="font-bold mr-1">
+                                                            Đơn hàng:
+                                                        </span>
+                                                        {e.id}
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold">
+                                                            Sản phẩm:
+                                                        </div>
+                                                        {e.products.map(
+                                                            (es) => (
+                                                                <div>
+                                                                    {es.name}
+                                                                </div>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                    {/* <div
+                                        className="cursor-pointer"
+                                        // onClick={dispatch(actions.setToken(""))}
+                                    >
+                                        {" "}
+                                        Logout
+                                    </div> */}
+                                </div>
+                            ) : (
+                                <Link href={"/login"}>
+                                    <div className="cursor-pointer">Login</div>
+                                </Link>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

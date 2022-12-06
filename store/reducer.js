@@ -3,12 +3,15 @@ import {
     SET_RELOAD,
     SET_SEARCH,
     SET_SEARCHMESSAGE,
+    SET_TOKEN,
 } from "./constrants";
 const initState = {
     search: "",
     reload: false,
     searchMessage: "",
     cart: [7],
+    token: "",
+    info: "",
 };
 
 function reducer(state, action) {
@@ -32,6 +35,23 @@ function reducer(state, action) {
             return {
                 ...state,
                 cart: [...state.cart, action.payload],
+            };
+        case SET_TOKEN:
+            let info = "";
+            if (action.payload != "") {
+                info = JSON.parse(
+                    Buffer.from(
+                        action.payload.split(".")[1],
+                        "base64"
+                    ).toString()
+                );
+            }
+
+            //{sub: 'user1', roles: 'ROLE_ADMIN, ROLE_USER', iss: 'http://localhost:8080/login', exp: 1670316867}
+            return {
+                ...state,
+                token: action.payload,
+                info: info,
             };
     }
 }
