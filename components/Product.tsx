@@ -6,7 +6,7 @@ function Product({ id, image, name, price, type }) {
     const [option, setOption] = useState(false);
     return (
         <div className="lg:min-w-[25%] lg:w-[25%] md:min-w-[33.33%] md:w-[33.33%] sm:min-w-[50%] sm:w-[50%] relative">
-            <div className="absolute top-3 right-0 rounded-2xl px-5 mt-3 z-10 w-max flex flex-col text-right justify-end">
+            {/* <div className="absolute top-3 right-0 rounded-2xl px-5 mt-3 z-10 w-max flex flex-col text-right justify-end">
                 <div onClick={() => setOption((prev) => !prev)}>
                     <MoreVertIcon />
                 </div>
@@ -16,7 +16,7 @@ function Product({ id, image, name, price, type }) {
                         <li className="cursor-pointer">Chỉnh sửa sản phẩm</li>
                     </ul>
                 )}
-            </div>
+            </div> */}
             <Link href={`/detail/${id}`}>
                 <div
                     key={id}

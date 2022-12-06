@@ -7,7 +7,7 @@ function ProductGrid({ id, image, name, price, type }) {
 
     return (
         <div className="w-full relative">
-            <div className="absolute top-3 right-0 rounded-2xl px-5 mt-3 z-10 w-max flex flex-col text-right justify-end">
+            {/* <div className="absolute top-3 right-0 rounded-2xl px-5 mt-3 z-10 w-max flex flex-col text-right justify-end">
                 <div onClick={() => setOption((prev) => !prev)}>
                     <MoreVertIcon />
                 </div>
@@ -17,7 +17,7 @@ function ProductGrid({ id, image, name, price, type }) {
                         <li className="cursor-pointer">Chỉnh sửa sản phẩm</li>
                     </ul>
                 )}
-            </div>
+            </div> */}
             <Link href={`/detail/${id}`}>
                 <div
                     key={id}

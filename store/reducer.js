@@ -10,7 +10,7 @@ const initState = {
     search: "",
     reload: false,
     searchMessage: "",
-    cart: [7],
+    cart: [],
     token: "",
     info: "",
 };
