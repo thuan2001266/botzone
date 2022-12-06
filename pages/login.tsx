@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useStore, actions } from "../store";
@@ -71,6 +72,14 @@ function login() {
                                 className="w-full py-1 rounded-lg bg-[#f0f0f0] text-black pl-2"
                             />
                         </div>
+                    </div>
+                    <div className="flex">
+                        <div>Chưa có tài khoản? </div>
+                        <Link href="/register">
+                            <div className="cursor-pointer ml-2 font-bold">
+                                Đăng ký
+                            </div>
+                        </Link>
                     </div>
                     {message && <div className="text-red-600">{message}</div>}
                     <div
