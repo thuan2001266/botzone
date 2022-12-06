@@ -4,6 +4,7 @@ import {
     SET_SEARCHMESSAGE,
     SET_CART,
     SET_TOKEN,
+    CLEAR_CART,
 } from "./constrants";
 
 export const setSearch = (payload) => ({
@@ -28,5 +29,10 @@ export const setCart = (payload) => ({
 
 export const setToken = (payload) => ({
     type: SET_TOKEN,
+    payload,
+});
+
+export const clearCart = (payload) => ({
+    type: CLEAR_CART,
     payload,
 });

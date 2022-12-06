@@ -4,6 +4,7 @@ import {
     SET_SEARCH,
     SET_SEARCHMESSAGE,
     SET_TOKEN,
+    CLEAR_CART,
 } from "./constrants";
 const initState = {
     search: "",
@@ -53,6 +54,8 @@ function reducer(state, action) {
                 token: action.payload,
                 info: info,
             };
+        case CLEAR_CART:
+            return { ...state, cart: [] };
     }
 }
 
