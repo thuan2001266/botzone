@@ -1,6 +1,7 @@
 import { useStore, actions } from "../store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 function register() {
     const [state, dispatch] = useStore();
@@ -75,6 +76,21 @@ function register() {
                             />
                         </div>
                     </div>
+                    <div className="flex space-x-2">
+                        <div>Đã có tài khoản? </div>
+                        <Link href="/login">
+                            <div className="cursor-pointer ml-2 font-bold">
+                                Đăng nhập
+                            </div>
+                        </Link>
+                        <div>hoặc</div>
+                        <Link href="/">
+                            <div className="cursor-pointer ml-2 font-bold">
+                                Trở về trang chủ
+                            </div>
+                        </Link>
+                    </div>
+
                     {error && <div className="text-red-600">{error}</div>}
                     <div className="m-auto flex items-center justify-center py-2 rounded-2xl mt-3 bg-[#0071e3] cursor-pointer ">
                         <div

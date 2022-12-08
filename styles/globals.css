@@ -9,9 +9,18 @@
   }
 }
 
-#slider::-webkit-scrollbar {
-display: none;}
+#siphone::-webkit-scrollbar {
+  display: none;
+}
 
-#slider {
+#smac::-webkit-scrollbar {
+  display: none;
+}
+
+#sipad::-webkit-scrollbar {
+  display: none;
+}
+
+#siphone, #smac, #sipad {
   scroll-behavior: smooth;
 }

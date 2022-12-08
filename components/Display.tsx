@@ -98,13 +98,29 @@ function Display({ type, data }: info) {
         // }
 
         //listCard.forEach((e) => {});
-        document.querySelector("#prev")?.addEventListener("click", () => {
-            document.getElementById("slider").scrollLeft -=
-                document.getElementById("slider").offsetWidth; // / divi
+        document.querySelector("#previphone")?.addEventListener("click", () => {
+            document.getElementById("siphone").scrollLeft -=
+                document.getElementById("siphone").offsetWidth; // / divi
         });
-        document.querySelector("#next")?.addEventListener("click", () => {
-            document.getElementById("slider").scrollLeft +=
-                document.getElementById("slider").offsetWidth; // / divi
+        document.querySelector("#nextiphone")?.addEventListener("click", () => {
+            document.getElementById("siphone").scrollLeft +=
+                document.getElementById("siphone").offsetWidth; // / divi
+        });
+        document.querySelector("#prevmac")?.addEventListener("click", () => {
+            document.getElementById("smac").scrollLeft -=
+                document.getElementById("smac").offsetWidth; // / divi
+        });
+        document.querySelector("#nextmac")?.addEventListener("click", () => {
+            document.getElementById("smac").scrollLeft +=
+                document.getElementById("smac").offsetWidth; // / divi
+        });
+        document.querySelector("#previpad")?.addEventListener("click", () => {
+            document.getElementById("sipad").scrollLeft -=
+                document.getElementById("sipad").offsetWidth; // / divi
+        });
+        document.querySelector("#nextipad")?.addEventListener("click", () => {
+            document.getElementById("sipad").scrollLeft +=
+                document.getElementById("sipad").offsetWidth; // / divi
         });
     }, []);
 
@@ -123,8 +139,16 @@ function Display({ type, data }: info) {
                 </div>
                 <div
                     className="flex m-auto mt-7 overflow-x-scroll" //w-4/5 max-w-4/5
-                    id="slider"
+                    // id="slider"
+                    id={
+                        type == "iPhone"
+                            ? "siphone"
+                            : type == "Macbook"
+                            ? "smac"
+                            : "sipad"
+                    }
                 >
+                    {console.log(data)}
                     {data.map((product) => (
                         <Product
                             key={product.id}
@@ -140,15 +164,28 @@ function Display({ type, data }: info) {
             <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-between">
                 <button
                     className="bg-[#68635c] rounded-full p-[6px] ml-24"
-                    id="prev"
-                    //onClick={prev}
+                    id={
+                        type == "iPhone"
+                            ? "previphone"
+                            : type == "Macbook"
+                            ? "prevmac"
+                            : "previpad"
+                    }
+                    // onClick={console.log("prev onclick")}
                 >
                     <ArrowBackIcon />
                 </button>
                 <button
                     className="bg-[#68635c] rounded-full p-[6px] mr-24"
-                    id="next"
-                    //onClick={next}
+                    // id="next"
+                    id={
+                        type == "iPhone"
+                            ? "nextiphone"
+                            : type == "Macbook"
+                            ? "nextmac"
+                            : "nextipad"
+                    }
+                    // onClick={console.log("next onclick")}
                 >
                     <ArrowForwardIcon />
                 </button>

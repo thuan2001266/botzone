@@ -73,14 +73,21 @@ function login() {
                             />
                         </div>
                     </div>
-                    <div className="flex">
+                    <div className="flex space-x-2">
                         <div>Chưa có tài khoản? </div>
                         <Link href="/register">
                             <div className="cursor-pointer ml-2 font-bold">
                                 Đăng ký
                             </div>
                         </Link>
+                        <div>hoặc</div>
+                        <Link href="/">
+                            <div className="cursor-pointer ml-2 font-bold">
+                                Trở về trang chủ
+                            </div>
+                        </Link>
                     </div>
+                    <div className="flex"></div>
                     {message && <div className="text-red-600">{message}</div>}
                     <div
                         className="m-auto flex items-center justify-center py-2 rounded-2xl mt-3 bg-[#0071e3] cursor-pointer "

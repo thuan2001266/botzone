@@ -36,13 +36,16 @@ function cart() {
             );
             const data = await response.json();
             setProductCart(data.data);
-            setSum(
-                data.data.reduce(
-                    (a: number, e: Products) =>
-                        a + Number(e.price[0].replace(".", "")),
-                    0
-                )
-            );
+            if (state.token != "") {
+                setSum(
+                    data.data.reduce(
+                        (a: number, e: Products) =>
+                            a + Number(e.price[0].replaceAll(".", "")),
+                        0
+                    )
+                );
+            }
+
             // setProductQuantity(
             //     data.data.map((e) => {
             //         return { product: e, quantity: 1 };
