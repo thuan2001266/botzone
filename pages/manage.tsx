@@ -122,189 +122,212 @@ function manage({ products }) {
 
     return (
         <div className="w-[100%] flex m-auto">
-            {authorizationCheck ? (
-                <div className="m-auto flex space-x-6">
-                    <div className="w-[500px]">
-                        <form action="">
-                            <div>
-                                <div>Tên</div>
-                                <input
-                                    value={iName}
-                                    onChange={(e) => setiName(e.target.value)}
-                                    type="text"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Giá</div>
-                                <input
-                                    value={iPrice}
-                                    onChange={(e) => setiPrice(e.target.value)}
-                                    type="text"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Màu</div>
-                                <input
-                                    value={iColor}
-                                    onChange={(e) => setiColor(e.target.value)}
-                                    type="text"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Hình ảnh</div>
-                                <textarea
-                                    value={iImage}
-                                    onChange={(e) => setiImage(e.target.value)}
-                                    cols="3"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Tùy chọn</div>
-                                <input
-                                    value={iOption}
-                                    onChange={(e) => setiOption(e.target.value)}
-                                    type="text"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Phân loại</div>
-                                <input
-                                    value={iType}
-                                    onChange={(e) => setiType(e.target.value)}
-                                    type="text"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Phiên bản</div>
-                                <input
-                                    value={iModel}
-                                    onChange={(e) => setiModel(e.target.value)}
-                                    type="text"
-                                    className="text-black px-2 py-1 rounded-md mb-2 w-full"
-                                />
-                            </div>
-                            <div>
-                                <div>Thực hiện</div>
-                                <div className="flex flex-col">
-                                    <div className="flex">
-                                        <input
-                                            className="text-black px-2 py-1 rounded-md mb-2"
-                                            type="radio"
-                                            defaultChecked
-                                            value="add"
-                                            name="action"
-                                            id="actionType"
-                                            ref={ref}
-                                        />{" "}
-                                        <div className="ml-1">
-                                            Thêm sản phẩm
+            <div className="w-[100%] m-auto grid h-screen w-full place-items-center">
+                <Link href="/">
+                    <div className="cursor-pointer my-2">Quay về trang chủ</div>
+                </Link>
+                {authorizationCheck ? (
+                    <div className="m-auto flex space-x-6">
+                        <div className="w-[500px]">
+                            <form action="">
+                                <div>
+                                    <div>Tên</div>
+                                    <input
+                                        value={iName}
+                                        onChange={(e) =>
+                                            setiName(e.target.value)
+                                        }
+                                        type="text"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Giá</div>
+                                    <input
+                                        value={iPrice}
+                                        onChange={(e) =>
+                                            setiPrice(e.target.value)
+                                        }
+                                        type="text"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Màu</div>
+                                    <input
+                                        value={iColor}
+                                        onChange={(e) =>
+                                            setiColor(e.target.value)
+                                        }
+                                        type="text"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Hình ảnh</div>
+                                    <textarea
+                                        value={iImage}
+                                        onChange={(e) =>
+                                            setiImage(e.target.value)
+                                        }
+                                        cols="3"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Tùy chọn</div>
+                                    <input
+                                        value={iOption}
+                                        onChange={(e) =>
+                                            setiOption(e.target.value)
+                                        }
+                                        type="text"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Phân loại</div>
+                                    <input
+                                        value={iType}
+                                        onChange={(e) =>
+                                            setiType(e.target.value)
+                                        }
+                                        type="text"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Phiên bản</div>
+                                    <input
+                                        value={iModel}
+                                        onChange={(e) =>
+                                            setiModel(e.target.value)
+                                        }
+                                        type="text"
+                                        className="text-black px-2 py-1 rounded-md mb-2 w-full"
+                                    />
+                                </div>
+                                <div>
+                                    <div>Thực hiện</div>
+                                    <div className="flex flex-col">
+                                        <div className="flex">
+                                            <input
+                                                className="text-black px-2 py-1 rounded-md mb-2"
+                                                type="radio"
+                                                defaultChecked
+                                                value="add"
+                                                name="action"
+                                                id="actionType"
+                                                ref={ref}
+                                            />{" "}
+                                            <div className="ml-1">
+                                                Thêm sản phẩm
+                                            </div>
+                                        </div>
+                                        <div className="flex">
+                                            <input
+                                                className="text-black px-2 py-1 rounded-md mb-2"
+                                                type="radio"
+                                                value="update"
+                                                name="action"
+                                                id="actionType2"
+                                                ref={ref2}
+                                            />{" "}
+                                            <div className="ml-1">
+                                                Sửa sản phẩm
+                                            </div>
+                                        </div>
+                                        <div className="flex">
+                                            <input
+                                                className="text-black px-2 py-1 rounded-md mb-2"
+                                                type="radio"
+                                                value="delete"
+                                                name="action"
+                                                id="actionType3"
+                                            />{" "}
+                                            <div className="ml-1">
+                                                Xóa sản phẩm
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="flex">
-                                        <input
-                                            className="text-black px-2 py-1 rounded-md mb-2"
-                                            type="radio"
-                                            value="update"
-                                            name="action"
-                                            id="actionType2"
-                                            ref={ref2}
-                                        />{" "}
-                                        <div className="ml-1">Sửa sản phẩm</div>
-                                    </div>
-                                    <div className="flex">
-                                        <input
-                                            className="text-black px-2 py-1 rounded-md mb-2"
-                                            type="radio"
-                                            value="delete"
-                                            name="action"
-                                            id="actionType3"
-                                        />{" "}
-                                        <div className="ml-1">Xóa sản phẩm</div>
-                                    </div>
                                 </div>
-                            </div>
-                            {message && <div className="">{message}</div>}
-                            <div>
-                                <button
-                                    onClick={ExecuteAction}
-                                    className="bg-[#0071e3] rounded-lg px-3 py-1 mt-2"
-                                    id="submitButton"
-                                >
-                                    Xác nhận
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div>
-                        <h2>Danh sách sản phẩm:</h2>
-                        <div className="h-screen overflow-y-scroll">
-                            <div className="bg-[#ffffff] rounded-2xl shadow-xl">
+                                {message && <div className="">{message}</div>}
                                 <div>
-                                    {theData &&
-                                        theData.map((p: Products) => (
-                                            <div
-                                                className="flex w-full px-5 pt-4 text-black"
-                                                key={p.id}
-                                                onClick={() => setInfo(p)}
-                                            >
-                                                <div className="flex flex-col justify-center">
-                                                    <div className="w-[90px] object-contain">
-                                                        <img
-                                                            src={p.img[0]}
-                                                            alt=""
-                                                        />
+                                    <button
+                                        onClick={ExecuteAction}
+                                        className="bg-[#0071e3] rounded-lg px-3 py-1 mt-2"
+                                        id="submitButton"
+                                    >
+                                        Xác nhận
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <h2>Danh sách sản phẩm:</h2>
+                            <div className="h-screen overflow-y-scroll">
+                                <div className="bg-[#ffffff] rounded-2xl shadow-xl">
+                                    <div>
+                                        {theData &&
+                                            theData.map((p: Products) => (
+                                                <div
+                                                    className="flex w-full px-5 pt-4 text-black"
+                                                    key={p.id}
+                                                    onClick={() => setInfo(p)}
+                                                >
+                                                    <div className="flex flex-col justify-center">
+                                                        <div className="w-[90px] object-contain">
+                                                            <img
+                                                                src={p.img[0]}
+                                                                alt=""
+                                                            />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div className="flex-1 px-7">
-                                                    Tên sản phẩm: {p.name}
-                                                </div>
-                                                <div>
-                                                    <div className="flex">
-                                                        Giá sản phẩm:{" "}
-                                                        <div className="font-medium pl-2">
-                                                            {p.price[0]}₫
+                                                    <div className="flex-1 px-7">
+                                                        Tên sản phẩm: {p.name}
+                                                    </div>
+                                                    <div>
+                                                        <div className="flex">
+                                                            Giá sản phẩm:{" "}
+                                                            <div className="font-medium pl-2">
+                                                                {p.price[0]}₫
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ) : (
-                <div className="grid h-screen w-full place-items-center text-center">
-                    <div className="mb-24">
-                        <h3 className="text-2xl">
-                            Bạn không có đủ quyền để truy cập vào đường link
-                            này!!
-                        </h3>
-                        <div className="flex justify-center mt-3">
-                            <div>Chuyển đến trang</div>
-                            <Link href={"/login"}>
-                                <div className="font-medium text-lg cursor-pointer ml-1">
-                                    đăng nhập.
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="flex justify-center mt-2">
-                            <div>Hoặc quay về</div>
-                            <Link href={"/"}>
-                                <div className="font-medium text-lg cursor-pointer ml-1">
-                                    trang chủ.
-                                </div>
-                            </Link>
+                ) : (
+                    <div className="grid h-screen w-full place-items-center text-center">
+                        <div className="mb-24">
+                            <h3 className="text-2xl">
+                                Bạn không có đủ quyền để truy cập vào đường link
+                                này!!
+                            </h3>
+                            <div className="flex justify-center mt-3">
+                                <div>Chuyển đến trang</div>
+                                <Link href={"/login"}>
+                                    <div className="font-medium text-lg cursor-pointer ml-1">
+                                        đăng nhập.
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="flex justify-center mt-2">
+                                <div>Hoặc quay về</div>
+                                <Link href={"/"}>
+                                    <div className="font-medium text-lg cursor-pointer ml-1">
+                                        trang chủ.
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

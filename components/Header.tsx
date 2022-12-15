@@ -205,7 +205,7 @@ function Header() {
                                         </div>
                                     )}
                                     {history && (
-                                        <div className="absolute left-[-320px] top-11 w-[300px] z-50 bg-[#3e3e3f] rounded-2xl pb-3 ">
+                                        <div className="absolute left-[-280px] top-11 w-[300px] z-50 bg-[#3e3e3f] rounded-2xl pb-3 ">
                                             {historyData.map((e) => (
                                                 <div className="px-3 pt-2">
                                                     <div>
