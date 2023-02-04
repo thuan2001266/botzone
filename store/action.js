@@ -5,7 +5,17 @@ import {
     SET_CART,
     SET_TOKEN,
     CLEAR_CART,
+    CHANGE_QUAN_CART,
+    REMOVE_FROM_CART,
+    ADD_CART,
+    SET_TYPE,
 } from "./constrants";
+
+export const setType = (payload) => ({
+    type: SET_TYPE,
+    payload,
+});
+
 
 export const setSearch = (payload) => ({
     type: SET_SEARCH,
@@ -24,6 +34,21 @@ export const setSearchMessage = (payload) => ({
 
 export const setCart = (payload) => ({
     type: SET_CART,
+    payload,
+});
+
+export const addCart = (payload) => ({
+    type: ADD_CART,
+    payload,
+});
+
+export const removeFromCart = (payload) => ({
+    type: REMOVE_FROM_CART,
+    payload,
+});
+
+export const editQuanInCart = (payload) => ({
+    type: CHANGE_QUAN_CART,
     payload,
 });
 

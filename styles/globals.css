@@ -21,6 +21,10 @@
   display: none;
 }
 
-#siphone, #smac, #sipad {
+#imageSlider::-webkit-scrollbar {
+  display: none;
+}
+
+#siphone, #smac, #sipad, #imageSlider {
   scroll-behavior: smooth;
 }
