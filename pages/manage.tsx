@@ -47,7 +47,7 @@ function Manage({ products }: { products: Products[] }) {
     setiPrice(p.price.join(", "));
     setiColor(p.color.join(", "));
     setiImage(p.img.join(", "));
-    setiOption(p.option.join(", "));
+    setiOption(p.optionToBuy.join(", "));
     setiType(p.type);
     setiModel(p.model);
   };

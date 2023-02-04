@@ -158,7 +158,7 @@ function Detail() {
                                     id={product.id}
                                     image={product.img[0]}
                                     name={
-                                        product.name + " " + product.option[0]
+                                        product.name + " " + product.optionToBuy[0]
                                     }
                                     price={product.price[0]}
                                     type={product.type}
