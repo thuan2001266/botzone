@@ -32,6 +32,7 @@ function ImageSlider() {
               <img
                 src={images[i].src}
                 alt=""
+                key={i}
                 // className="w-full object-cover transition duration-500 ease-in-out"
                 className={`transition duration-500 ease-in-out h-full w-full object-cover`}
                 // style={{ transition: "all 0.5s ease-in-out" }}

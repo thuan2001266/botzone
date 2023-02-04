@@ -75,22 +75,17 @@ function Detail({ product }: ProductItem) {
                   {product.option.map((opt) => (
                     <li
                       key={opt}
-                      onClick={
-                        () =>
-                          setInfoToCart((prev) => ({
-                            ...prev,
-                            spec: product.option.indexOf(opt),
-                          }))
-                        // setStorage(
-                        //     product.option.indexOf(opt)
-                        // )
+                      onClick={() =>
+                        setInfoToCart((prev) => ({
+                          ...prev,
+                          spec: product.option.indexOf(opt),
+                        }))
                       }
                       className={
                         product.option.indexOf(opt) == infoToCart.spec
                           ? "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#2f3033]"
                           : "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#4c4c53] text-[#a9a9a9]"
                       }
-                      key={opt}
                     >
                       {opt}
                     </li>
@@ -110,15 +105,11 @@ function Detail({ product }: ProductItem) {
                   {product.color.map((opt) => (
                     <li
                       key={opt}
-                      onClick={
-                        () =>
-                          setInfoToCart((prev) => ({
-                            ...prev,
-                            color: product.color.indexOf(opt),
-                          }))
-                        // setColor(
-                        //     product.color.indexOf(opt)
-                        // )
+                      onClick={() =>
+                        setInfoToCart((prev) => ({
+                          ...prev,
+                          color: product.color.indexOf(opt),
+                        }))
                       }
                       className={
                         product.color.indexOf(opt) == infoToCart.color
@@ -198,7 +189,6 @@ function Detail({ product }: ProductItem) {
             </div>
           </div>
         </div>
-        <div></div>
       </div>
     </Layout>
   );

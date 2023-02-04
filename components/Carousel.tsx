@@ -42,6 +42,7 @@ function Carousel({ images }) {
             {images.map((e, i) => {
               return (
                 <div
+                  key={i}
                   onClick={() => setCurrentIndex(i)}
                   className={
                     i == currentIndex
