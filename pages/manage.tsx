@@ -57,7 +57,7 @@ function Manage({ products }) {
 
     let destination = "";
     let method = "";
-    if (ref.current.checked) {
+    if (ref.current != null && ref.current.checked) {
       destination = "http://localhost:8080/api/manage/addProduct";
       method = "POST";
     } else {

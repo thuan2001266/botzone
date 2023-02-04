@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { imageCarousel } from "../interface";
+import { StaticImageData } from "next/image";
 let count = 0;
-function Carousel({ images }: { images: imageCarousel[] }) {
+function Carousel({ images }: { images: StaticImageData[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleOnPrevClick = () => {

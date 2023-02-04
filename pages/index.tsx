@@ -16,7 +16,7 @@ export async function getServerSideProps() {
   return { props: { products: data.data } };
 }
 
-const Home: NextPage = ({ products }) => {
+const Home: NextPage = ({ products }: { products: Products[] }) => {
   const iphone = products.filter((e: Products) => {
     return e.type == "iphone";
   });
