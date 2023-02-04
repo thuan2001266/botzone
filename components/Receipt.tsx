@@ -23,9 +23,8 @@ function Receipt({
               >
                 {receiptProductsProp?.find((e2) => e2.id == es.id)?.name +
                   " | " +
-                  receiptProductsProp?.find((e2) => e2.id == es.id)?.option[
-                    es.spec
-                  ] +
+                  receiptProductsProp?.find((e2) => e2.id == es.id)
+                    ?.optionToBuy[es.spec] +
                   " | " +
                   receiptProductsProp?.find((e2) => e2.id == es.id)?.color[
                     es.color
