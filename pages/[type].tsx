@@ -72,7 +72,7 @@ export const getStaticProps = async (context) => {
   };
 };
 
-function type({ product, typeList, productType }) {
+function Type({ product, typeList, productType }) {
   const [type, setType] = useState("Tất cả");
   const [order, setOrder] = useState("Mới ra mắt");
   const [orderScreen, setOrderScreen] = useState<boolean>(false);
