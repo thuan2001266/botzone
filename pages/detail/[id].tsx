@@ -160,8 +160,9 @@ function Detail({ product }: ProductItem) {
                   khuyến mãi khác của iPad) Xem chi tiết
                 </li>
                 <li>
-                  Giảm giá 35% iPad Pro M1 12.9" 2021 (tuỳ phiên bản) khi mua
-                  kèm iPhone (Không kèm khuyến mãi khác của iPad) Xem chi tiết
+                  Giảm giá 35% iPad Pro M1 12.9&quot; 2021 (tuỳ phiên bản) khi
+                  mua kèm iPhone (Không kèm khuyến mãi khác của iPad) Xem chi
+                  tiết
                 </li>
                 <li>
                   Phụ kiện chính hãng Apple giảm 30% khi mua kèm iPhone Xem chi
