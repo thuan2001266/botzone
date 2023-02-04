@@ -32,38 +32,38 @@ function Display({ type, data }: info) {
     // }
     document.querySelector("#previphone")?.addEventListener("click", () => {
       if (document.querySelector("#siphone") != undefined) {
-        document.querySelector("#siphone")?.scrollLeft -=
-          document.querySelector("#siphone")?.offsetWidth;
+        document.querySelector("#siphone").scrollLeft -=
+          document.querySelector("#siphone").offsetWidth;
       }
     });
     document.querySelector("#nextiphone")?.addEventListener("click", () => {
       if (document.querySelector("#siphone") != undefined) {
-        document.querySelector("#siphone")?.scrollLeft +=
-          document.querySelector("#siphone")?.offsetWidth;
+        document.querySelector("#siphone").scrollLeft +=
+          document.querySelector("#siphone").offsetWidth;
       }
     });
     document.querySelector("#prevmac")?.addEventListener("click", () => {
       if (document.querySelector("#smac") != undefined) {
-        document.querySelector("#smac")?.scrollLeft -=
+        document.querySelector("#smac").scrollLeft -=
           document.querySelector("#smac")?.offsetWidth;
       }
     });
     document.querySelector("#nextmac")?.addEventListener("click", () => {
       if (document.querySelector("#smac") != undefined) {
-        document.querySelector("#smac")?.scrollLeft +=
-          document.querySelector("#smac")?.offsetWidth;
+        document.querySelector("#smac").scrollLeft +=
+          document.querySelector("#smac").offsetWidth;
       }
     });
     document.querySelector("#previpad")?.addEventListener("click", () => {
       if (document.querySelector("#sipad") != undefined) {
-        document.querySelector("#sipad")?.scrollLeft -=
-          document.querySelector("#sipad")?.offsetWidth;
+        document.querySelector("#sipad").scrollLeft -=
+          document.querySelector("#sipad").offsetWidth;
       }
     });
     document.querySelector("#nextipad")?.addEventListener("click", () => {
       if (document.querySelector("#smac") != undefined) {
-        document.querySelector("#sipad")?.scrollLeft +=
-          document.querySelector("#sipad")?.offsetWidth;
+        document.querySelector("#sipad").scrollLeft +=
+          document.querySelector("#sipad").offsetWidth;
       }
     });
   }, []);
