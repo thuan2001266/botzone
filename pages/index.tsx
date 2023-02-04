@@ -32,8 +32,6 @@ const Home: NextPage = ({ products }: { products: Products[] }) => {
 
   let images = Object.values(image);
 
-  console.log(images);
-
   return (
     <Layout>
       <Head>
