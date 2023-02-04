@@ -68,3 +68,10 @@ export interface receipt {
   addresses: toCart;
   method: string;
 }
+
+export interface imageCarousel {
+  src: string;
+  height: number;
+  width: number;
+  blurDataURL: string;
+}
