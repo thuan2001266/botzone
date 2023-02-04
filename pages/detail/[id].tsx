@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 import { ProductItem, Products, toCart } from "../../interface";
 import { useStore, actions } from "../../store";
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:8080/api/product");
+  const res = await fetch(process.env.beurl + "/api/product");
   const data = await res.json();
   const paths = data.data.map((a: Products) => {
     return {
@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: { params: { id: string } }) => {
   const id = context.params.id;
-  const res = await fetch("http://localhost:8080/api/product/" + id);
+  const res = await fetch(process.env.beurl + "/api/product/" + id);
   const data = await res.json();
   return {
     props: { product: data.data[0] },

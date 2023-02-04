@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ProductItem, Products } from "../interface";
 import { useStore, actions } from "../store";
 export async function getServerSideProps() {
-  const result = await fetch(`http://localhost:8080/api/product`);
+  const result = await fetch(process.env.beurl + `/api/product`);
   const data = await result.json();
   return { props: { products: data.data } };
 }
@@ -62,14 +62,14 @@ function Manage({ products }: { products: Products[] }) {
       const tempRef1: HTMLInputElement = ref.current;
       const tempRef2: HTMLInputElement = ref2.current;
       if (tempRef1.checked) {
-        destination = "http://localhost:8080/api/manage/addProduct";
+        destination = process.env.beurl + "/api/manage/addProduct";
         method = "POST";
       } else {
         if (tempRef2.checked) {
-          destination = "http://localhost:8080/api/manage/updateProduct";
+          destination = process.env.beurl + "/api/manage/updateProduct";
           method = "POST";
         } else {
-          destination = "http://localhost:8080/api/manage/deleteProduct";
+          destination = process.env.beurl + "/api/manage/deleteProduct";
           method = "POST";
         }
       }
@@ -101,7 +101,7 @@ function Manage({ products }: { products: Products[] }) {
         data = await response.json();
         setMessage(data.message);
 
-        fetch("http://localhost:8080/api/product")
+        fetch(process.env.beurl + "/api/product")
           .then((response) => response.json())
           .then((data) => setTheData(data.data));
         // const reFetchData = async () => {

@@ -13,7 +13,7 @@ function Verification() {
       const { token } = router.query;
       const tempToken = token + "";
       const verificate = async () => {
-        const result = await fetch(`http://localhost:8080/api/verificate`, {
+        const result = await fetch(process.env.beurl + `/api/verificate`, {
           method: "POST",
           mode: "cors",
           credentials: "same-origin",

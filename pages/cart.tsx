@@ -28,7 +28,7 @@ function Cart() {
   );
   useEffect(() => {
     const fetchCart = async () => {
-      const response = await fetch(`http://localhost:8080/api/product/cart`, {
+      const response = await fetch(process.env.beurl + `/api/product/cart`, {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",
@@ -95,7 +95,7 @@ function Cart() {
 
     // let method = ref.current.checked ? "store" : "home";
     const addReceipt = async () => {
-      const response = await fetch(`http://localhost:8080/api/addReceipt`, {
+      const response = await fetch(process.env.beurl + `/api/addReceipt`, {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",

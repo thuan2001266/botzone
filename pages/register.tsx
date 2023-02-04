@@ -15,7 +15,7 @@ function Register() {
   let data;
   // useEffect(() => {
   const register = async () => {
-    const response = await fetch(`http://localhost:8080/api/register`, {
+    const response = await fetch(process.env.beurl + `api/register`, {
       method: "POST",
       // mode: "no-cors",
       headers: {

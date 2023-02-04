@@ -12,7 +12,7 @@ import image from "../assets/images";
 import React from "react";
 
 export async function getServerSideProps() {
-  const result = await fetch(`http://localhost:8080/api/product`);
+  const result = await fetch(process.env.beurl + `/api/product`);
   const data = await result.json();
   return { props: { products: data.data } };
 }
