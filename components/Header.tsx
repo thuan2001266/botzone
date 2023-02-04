@@ -14,7 +14,7 @@ function Header() {
   const [userMenu, setUserMenu] = useState(false);
   const [history, setHistory] = useState(false);
   const [historyData, setHistoryData] = useState<Array<receipt>>();
-  const [listProductId, setListProductId] = useState<Array<string>>();
+  const [listProductId, setListProductId] = useState<Array<string>>([]);
   const [receiptProducts, setReceiptProducts] = useState<Array<Products>>();
   const [state, dispatch] = useStore();
   const [searchVisibility, setSearchVisibility] = useState(false);
@@ -52,7 +52,7 @@ function Header() {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          listCart: listProductId,
+          listCart: listProductId.join(","),
         }),
       });
       const data = await response.json();
@@ -257,10 +257,10 @@ function Header() {
                       </ul>
                     </div>
                   )}
-                  {history && (
+                  {history && historyData && receiptProducts && (
                     <Receipt
-                      historyData={historyData}
-                      receiptProducts={receiptProducts}
+                      historyDataProp={historyData}
+                      receiptProductsProp={receiptProducts}
                     />
                   )}
                   {/* <div

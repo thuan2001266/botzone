@@ -10,7 +10,7 @@ export async function getServerSideProps() {
   return { props: { products: data.data } };
 }
 
-function Manage({ products }) {
+function Manage({ products }: { products: Products[] }) {
   const [theData, setTheData] = useState(products);
   const [reFetch, setReFetch] = useState(false);
 
@@ -52,21 +52,26 @@ function Manage({ products }) {
     setiModel(p.model);
   };
 
-  const ExecuteAction = async (e) => {
+  const ExecuteAction = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     let destination = "";
     let method = "";
-    if (ref.current != null && ref.current.checked) {
-      destination = "http://localhost:8080/api/manage/addProduct";
-      method = "POST";
-    } else {
-      if (ref2.current.checked) {
-        destination = "http://localhost:8080/api/manage/updateProduct";
+
+    if (ref.current && ref2.current) {
+      const tempRef1: HTMLInputElement = ref.current;
+      const tempRef2: HTMLInputElement = ref2.current;
+      if (tempRef1.checked) {
+        destination = "http://localhost:8080/api/manage/addProduct";
         method = "POST";
       } else {
-        destination = "http://localhost:8080/api/manage/deleteProduct";
-        method = "POST";
+        if (tempRef2.checked) {
+          destination = "http://localhost:8080/api/manage/updateProduct";
+          method = "POST";
+        } else {
+          destination = "http://localhost:8080/api/manage/deleteProduct";
+          method = "POST";
+        }
       }
     }
 
@@ -122,7 +127,7 @@ function Manage({ products }) {
 
   return (
     <div className="w-[100%] flex m-auto">
-      <div className="w-[100%] m-auto grid h-screen w-full place-items-center">
+      <div className=" m-auto grid h-screen w-full place-items-center">
         <Link href="/">
           <div className="cursor-pointer my-2">Quay về trang chủ</div>
         </Link>
@@ -162,7 +167,7 @@ function Manage({ products }) {
                   <textarea
                     value={iImage}
                     onChange={(e) => setiImage(e.target.value)}
-                    cols="3"
+                    cols={3}
                     className="text-black px-2 py-1 rounded-md mb-2 w-full"
                   />
                 </div>

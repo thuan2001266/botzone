@@ -2,7 +2,17 @@ import Link from "next/link";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 
-function Product({ id, image, name, price, type, option }) {
+function Product({
+  id,
+  image,
+  name,
+  price,
+}: {
+  id: string;
+  image: string;
+  name: string;
+  price: string;
+}) {
   // const [option, setOption] = useState(false);
   return (
     <Link href={`/detail/${id}`}>

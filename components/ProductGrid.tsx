@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { useState } from "react";
 
-function ProductGrid({ id, image, name, price, type }) {
+function ProductGrid({
+  id,
+  image,
+  name,
+  price,
+}: {
+  id: string;
+  image: string;
+  name: string;
+  price: string;
+}) {
   return (
     <Link href={`/detail/${id}`}>
       <div className="w-full relative">

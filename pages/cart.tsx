@@ -37,18 +37,12 @@ function Cart() {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          listCart: productIdArr,
+          listCart: productIdArr.join(","),
         }),
       });
       const data = await response.json();
-      console.log(data.data);
-
       setProductCart(data.data);
       if (state.token != "") {
-        console.log("sum cart: ");
-        console.log(state.cart);
-        console.log();
-
         setSum(
           state.cart.reduce((s: number, e: toCart) => {
             return (
@@ -56,7 +50,7 @@ function Cart() {
               Number(e.quant) *
                 Number(
                   data.data
-                    .find((ein) => (ein.id = e.id))
+                    .find((ein: Products) => (ein.id = e.id))
                     .price[e.spec].replaceAll(".", "")
                 )
             );
@@ -68,17 +62,14 @@ function Cart() {
   }, []);
 
   useEffect(() => {
-    if (productCart.length > 0) {
+    if (productCart && productCart.length > 0) {
       setSum(
         state.cart.reduce((s: number, e: toCart) => {
+          let tempPrice = productCart.find((ein: Products) => (ein.id = e.id));
           return (
             s +
             Number(e.quant) *
-              Number(
-                productCart
-                  .find((ein) => (ein.id = e.id))
-                  .price[e.spec].replaceAll(".", "")
-              )
+              Number(tempPrice?.price[e.spec].replaceAll(".", ""))
           );
         }, 0)
       );
@@ -96,7 +87,13 @@ function Cart() {
   const purchase = () => {
     const listProduct = state.cart;
     const user = state.info.sub;
-    let method = ref.current.checked ? "store" : "home";
+    let method = "store";
+    if (ref.current) {
+      const tempRef: HTMLInputElement = ref.current;
+      method = tempRef.checked ? "store" : "home";
+    }
+
+    // let method = ref.current.checked ? "store" : "home";
     const addReceipt = async () => {
       const response = await fetch(`http://localhost:8080/api/addReceipt`, {
         method: "POST",

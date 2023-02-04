@@ -65,7 +65,7 @@ export interface role {
 export interface receipt {
   id: number;
   user: user;
-  addresses: toCart;
+  addresses: toCart[];
   method: string;
 }
 
@@ -74,4 +74,12 @@ export interface imageCarousel {
   height: number;
   width: number;
   blurDataURL: string;
+}
+
+export interface contextType {
+  params: typeString;
+}
+
+export interface typeString {
+  type: string;
 }

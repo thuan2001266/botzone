@@ -31,39 +31,39 @@ function Display({ type, data }: info) {
     //   divi = 1;
     // }
     document.querySelector("#previphone")?.addEventListener("click", () => {
-      if (document.querySelector("#siphone") != undefined) {
-        document.querySelector("#siphone").scrollLeft -=
-          document.querySelector("#siphone").offsetWidth;
+      let iPhoneQuery = document.querySelector("#siphone") as HTMLElement;
+      if (iPhoneQuery != undefined && iPhoneQuery != null) {
+        iPhoneQuery.scrollLeft -= iPhoneQuery.offsetWidth;
       }
     });
     document.querySelector("#nextiphone")?.addEventListener("click", () => {
-      if (document.querySelector("#siphone") != undefined) {
-        document.querySelector("#siphone").scrollLeft +=
-          document.querySelector("#siphone").offsetWidth;
+      let iPhoneQuery = document.querySelector("#siphone") as HTMLElement;
+      if (iPhoneQuery != undefined && iPhoneQuery != null) {
+        iPhoneQuery.scrollLeft += iPhoneQuery.offsetWidth;
       }
     });
     document.querySelector("#prevmac")?.addEventListener("click", () => {
-      if (document.querySelector("#smac") != undefined) {
-        document.querySelector("#smac").scrollLeft -=
-          document.querySelector("#smac")?.offsetWidth;
+      let macQuery = document.querySelector("#smac") as HTMLElement;
+      if (macQuery != undefined && macQuery != null) {
+        macQuery.scrollLeft -= macQuery.offsetWidth;
       }
     });
     document.querySelector("#nextmac")?.addEventListener("click", () => {
-      if (document.querySelector("#smac") != undefined) {
-        document.querySelector("#smac").scrollLeft +=
-          document.querySelector("#smac").offsetWidth;
+      let macQuery = document.querySelector("#smac") as HTMLElement;
+      if (macQuery != undefined && macQuery != null) {
+        macQuery.scrollLeft += macQuery.offsetWidth;
       }
     });
     document.querySelector("#previpad")?.addEventListener("click", () => {
-      if (document.querySelector("#sipad") != undefined) {
-        document.querySelector("#sipad").scrollLeft -=
-          document.querySelector("#sipad").offsetWidth;
+      let ipadQuery = document.querySelector("#sipad") as HTMLElement;
+      if (ipadQuery != undefined && ipadQuery != null) {
+        ipadQuery.scrollLeft -= ipadQuery.offsetWidth;
       }
     });
     document.querySelector("#nextipad")?.addEventListener("click", () => {
-      if (document.querySelector("#smac") != undefined) {
-        document.querySelector("#sipad").scrollLeft +=
-          document.querySelector("#sipad").offsetWidth;
+      let ipadQuery = document.querySelector("#sipad") as HTMLElement;
+      if (ipadQuery != undefined && ipadQuery != null) {
+        ipadQuery.scrollLeft += ipadQuery.offsetWidth;
       }
     });
   }, []);
@@ -92,8 +92,6 @@ function Display({ type, data }: info) {
               image={product.img[0]}
               name={product.name + " " + product.option[0]}
               price={product.price[0]}
-              type={product.type}
-              option={product.option[0]}
             />
           ))}
         </div>

@@ -5,7 +5,7 @@ import AppleIcon from "@mui/icons-material/Apple";
 import Layout from "../components/Layout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Products } from "../interface";
+import { contextType, Products } from "../interface";
 import Carousel from "../components/Carousel";
 import iphoneImageImport from "../assets/typeImages/iphone";
 import ipadImageImport from "../assets/typeImages/ipad";
@@ -15,13 +15,17 @@ export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:8080/api/product");
   const data = await res.json();
 
-  const temppaths = data.data.map((a) => {
+  const temppaths = data.data.map((a: Products) => {
     return a.type;
   });
 
-  const temppaths2 = [...new Set(temppaths)];
+  // const temppaths2 = [...new Set(temppaths)];
 
-  const paths = temppaths2.map((p) => {
+  const temppaths2 = temppaths.filter(
+    (element: string, index: number) => temppaths.indexOf(element) === index
+  );
+
+  const paths = temppaths2.map((p: string) => {
     return {
       params: {
         type: p.toString(),
@@ -35,7 +39,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: contextType) => {
   const type = context.params.type;
 
   let productType = "";
@@ -72,7 +76,15 @@ export const getStaticProps = async (context) => {
   };
 };
 
-function Type({ product, typeList, productType }) {
+function Type({
+  product,
+  typeList,
+  productType,
+}: {
+  product: Products[];
+  typeList: string[];
+  productType: string;
+}) {
   const [type, setType] = useState("Tất cả");
   const [order, setOrder] = useState("Mới ra mắt");
   const [orderScreen, setOrderScreen] = useState<boolean>(false);
@@ -225,7 +237,6 @@ function Type({ product, typeList, productType }) {
                     image={product.img[0]}
                     name={product.name + " " + product.option[0]}
                     price={product.price[0]}
-                    type={product.type}
                   />
                 ))}
             </div>

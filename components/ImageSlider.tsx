@@ -8,13 +8,17 @@ function ImageSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const refContainer = useRef(null);
 
-  console.log(refContainer.current);
-
   const handleOnPrevClick = () => {
-    refContainer.current.scrollLeft -= refContainer.current.offsetWidth;
+    if (refContainer.current) {
+      const tempRef: HTMLElement = refContainer.current;
+      tempRef.scrollLeft -= tempRef.offsetWidth;
+    }
   };
   const handleOnNextClick = () => {
-    refContainer.current.scrollLeft += refContainer.current.offsetWidth;
+    if (refContainer.current) {
+      const tempRef: HTMLElement = refContainer.current;
+      tempRef.scrollLeft += tempRef.offsetWidth;
+    }
   };
 
   useEffect(() => {}, []);

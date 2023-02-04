@@ -11,7 +11,7 @@ function Verification() {
   useEffect(() => {
     if (router.isReady) {
       const { token } = router.query;
-
+      const tempToken = token + "";
       const verificate = async () => {
         const result = await fetch(`http://localhost:8080/api/verificate`, {
           method: "POST",
@@ -22,7 +22,7 @@ function Verification() {
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body: new URLSearchParams({
-            token: token,
+            token: tempToken,
           }),
         });
         const data = await result.json();
