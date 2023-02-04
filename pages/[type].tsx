@@ -236,4 +236,4 @@ function Type({ product, typeList, productType }) {
   );
 }
 
-export default type;
+export default Type;

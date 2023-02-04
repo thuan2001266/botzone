@@ -5,7 +5,7 @@ import { useStore, actions } from "../store";
 import logo from "../assets/topzone";
 import Head from "next/head";
 
-function login() {
+function Login() {
   const [state, dispatch] = useStore();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -113,4 +113,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

@@ -10,7 +10,7 @@ import { actions, useStore } from "../store";
 //     return { props: { products: data.data } };
 // }
 
-function detail() {
+function Detail() {
     const [state, dispatch] = useStore();
     const [productBySearch, setProductBySearch] = useState([]);
     let message = state.search;
@@ -180,4 +180,4 @@ function detail() {
     );
 }
 
-export default detail;
+export default Detail;

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-function verification() {
+function Verification() {
   const router = useRouter();
   const [result, setResult] = useState("");
   // const [token, setToken] = useState("");
@@ -35,4 +35,4 @@ function verification() {
   return <div className="text-lg text-white">{result}</div>;
 }
 
-export default verification;
+export default Verification;

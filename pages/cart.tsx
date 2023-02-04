@@ -12,7 +12,7 @@ import {
 import { clearCart, setCart } from "../store/action";
 import Header from "../components/Header";
 
-function cart() {
+function Cart() {
   const [state, dispatch] = useStore();
   const [productCart, setProductCart] = useState<Array<Products>>([]);
   const [sum, setSum] = useState<number>(0);
@@ -281,4 +281,4 @@ function cart() {
   );
 }
 
-export default cart;
+export default Cart;

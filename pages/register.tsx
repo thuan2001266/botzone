@@ -5,7 +5,7 @@ import Link from "next/link";
 import logo from "../assets/topzone";
 import Head from "next/head";
 
-function register() {
+function Register() {
   const [state, dispatch] = useStore();
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -123,4 +123,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;

@@ -29,7 +29,7 @@ export const getStaticProps = async (context) => {
   };
 };
 
-function detail({ product }: ProductItem) {
+function Detail({ product }: ProductItem) {
   const [state, dispatch] = useStore();
   const [storage, setStorage] = useState(0);
   const [color, setColor] = useState(0);
@@ -204,4 +204,4 @@ function detail({ product }: ProductItem) {
   );
 }
 
-export default detail;
+export default Detail;
