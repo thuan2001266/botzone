@@ -21,7 +21,7 @@ function Detail() {
         const fetchResult = async () => {
             if (state.search != "") {
                 const result = await fetch(
-                    process.env.beurl + `/api/product/search/` + state.search,
+                    process.env.beurl + `api/product/search/` + state.search,
                     {
                         method: "GET",
                         mode: "cors",

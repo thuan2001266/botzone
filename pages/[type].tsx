@@ -12,7 +12,7 @@ import ipadImageImport from "../assets/typeImages/ipad";
 import macImageImport from "../assets/typeImages/mac";
 
 export const getStaticPaths = async () => {
-  const res = await fetch(process.env.beurl + "/api/product");
+  const res = await fetch(process.env.beurl + "api/product");
   const data = await res.json();
 
   const temppaths = data.data.map((a: Products) => {
@@ -62,7 +62,7 @@ export const getStaticProps = async (context: contextType) => {
       break;
   }
 
-  const res = await fetch(process.env.beurl + `/api/product/type/` + type);
+  const res = await fetch(process.env.beurl + `api/product/type/` + type);
   const data = await res.json();
 
   let typeList = [...new Set(data.data.map((dat: Products) => dat.model))];

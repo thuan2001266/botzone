@@ -90,7 +90,7 @@ function Display({ type, data }: info) {
               key={product.id}
               id={product.id}
               image={product.img[0]}
-              name={product.name + " " + product.option[0]}
+              name={product.name + " " + product.optionToBuy[0]}
               price={product.price[0]}
             />
           ))}

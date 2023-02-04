@@ -4,7 +4,7 @@ export interface Products {
   price: Array<string>;
   color: Array<string>;
   img: Array<string>;
-  option: Array<string>;
+  optionToBuy: Array<string>;
   discount: string;
   date: number;
   type: string;
