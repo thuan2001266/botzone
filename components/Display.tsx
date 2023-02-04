@@ -31,28 +31,28 @@ function Display({ type, data }: info) {
     //   divi = 1;
     // }
     document.querySelector("#previphone")?.addEventListener("click", () => {
-      document.getElementById("siphone").scrollLeft -=
-        document.getElementById("siphone").offsetWidth;
+      document.getElementById("siphone")?.scrollLeft -=
+        document.getElementById("siphone")?.offsetWidth;
     });
     document.querySelector("#nextiphone")?.addEventListener("click", () => {
-      document.getElementById("siphone").scrollLeft +=
-        document.getElementById("siphone").offsetWidth;
+      document.getElementById("siphone")?.scrollLeft +=
+        document.getElementById("siphone")?.offsetWidth;
     });
     document.querySelector("#prevmac")?.addEventListener("click", () => {
-      document.getElementById("smac").scrollLeft -=
-        document.getElementById("smac").offsetWidth;
+      document.getElementById("smac")?.scrollLeft -=
+        document.getElementById("smac")?.offsetWidth;
     });
     document.querySelector("#nextmac")?.addEventListener("click", () => {
-      document.getElementById("smac").scrollLeft +=
-        document.getElementById("smac").offsetWidth;
+      document.getElementById("smac")?.scrollLeft +=
+        document.getElementById("smac")?.offsetWidth;
     });
     document.querySelector("#previpad")?.addEventListener("click", () => {
-      document.getElementById("sipad").scrollLeft -=
-        document.getElementById("sipad").offsetWidth;
+      document.getElementById("sipad")?.scrollLeft -=
+        document.getElementById("sipad")?.offsetWidth;
     });
     document.querySelector("#nextipad")?.addEventListener("click", () => {
-      document.getElementById("sipad").scrollLeft +=
-        document.getElementById("sipad").offsetWidth;
+      document.getElementById("sipad")?.scrollLeft +=
+        document.getElementById("sipad")?.offsetWidth;
     });
   }, []);
 
