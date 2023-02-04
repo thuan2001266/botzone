@@ -31,28 +31,40 @@ function Display({ type, data }: info) {
     //   divi = 1;
     // }
     document.querySelector("#previphone")?.addEventListener("click", () => {
-      document.querySelector("#siphone")?.scrollLeft -=
-        document.querySelector("#siphone")?.offsetWidth;
+      if (document.querySelector("#siphone") != undefined) {
+        document.querySelector("#siphone")?.scrollLeft -=
+          document.querySelector("#siphone")?.offsetWidth;
+      }
     });
     document.querySelector("#nextiphone")?.addEventListener("click", () => {
-      document.querySelector("#siphone")?.scrollLeft +=
-        document.querySelector("#siphone")?.offsetWidth;
+      if (document.querySelector("#siphone") != undefined) {
+        document.querySelector("#siphone")?.scrollLeft +=
+          document.querySelector("#siphone")?.offsetWidth;
+      }
     });
     document.querySelector("#prevmac")?.addEventListener("click", () => {
-      document.querySelector("#smac")?.scrollLeft -=
-        document.querySelector("#smac")?.offsetWidth;
+      if (document.querySelector("#smac") != undefined) {
+        document.querySelector("#smac")?.scrollLeft -=
+          document.querySelector("#smac")?.offsetWidth;
+      }
     });
     document.querySelector("#nextmac")?.addEventListener("click", () => {
-      document.querySelector("#smac")?.scrollLeft +=
-        document.querySelector("#smac")?.offsetWidth;
+      if (document.querySelector("#smac") != undefined) {
+        document.querySelector("#smac")?.scrollLeft +=
+          document.querySelector("#smac")?.offsetWidth;
+      }
     });
     document.querySelector("#previpad")?.addEventListener("click", () => {
-      document.querySelector("#sipad")?.scrollLeft -=
-        document.querySelector("#sipad")?.offsetWidth;
+      if (document.querySelector("#sipad") != undefined) {
+        document.querySelector("#sipad")?.scrollLeft -=
+          document.querySelector("#sipad")?.offsetWidth;
+      }
     });
     document.querySelector("#nextipad")?.addEventListener("click", () => {
-      document.querySelector("#sipad")?.scrollLeft +=
-        document.querySelector("#sipad")?.offsetWidth;
+      if (document.querySelector("#smac") != undefined) {
+        document.querySelector("#sipad")?.scrollLeft +=
+          document.querySelector("#sipad")?.offsetWidth;
+      }
     });
   }, []);
 
