@@ -27,8 +27,6 @@ function Login() {
     try {
       data = await response.json();
       if (data.access_token) {
-        console.log(data.access_token);
-        console.log(data.refresh_token);
         dispatch(actions.setToken(data.access_token));
         dispatch(actions.setRefreshToken(data.refresh_token));
         router.push("/");
