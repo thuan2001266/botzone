@@ -21,7 +21,7 @@ function Manage({ products }: { products: Products[] }) {
   const ref = useRef(null);
   const ref2 = useRef(null);
 
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState("");
 
   const [iId, setiId] = useState("");
   const [iName, setiName] = useState("");
