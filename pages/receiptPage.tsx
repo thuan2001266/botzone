@@ -1,8 +1,8 @@
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import Link from "next/link";
-import { useStore } from "../store";
+import { useStore } from "../store/index";
 import { useEffect, useState } from "react";
-import { Products, receipt, toCart } from "../interface";
+import { Products, receipt, toCart } from "../interface/index";
 import Header from "../components/Header";
 
 function ReceiptPage() {
@@ -13,18 +13,21 @@ function ReceiptPage() {
 
   useEffect(() => {
     const fetchCart = async () => {
-      const response = await fetch(process.env.beurl + `api/product/cart`, {
-        method: "POST",
-        mode: "cors",
-        credentials: "same-origin",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          listCart: listProductId.join(","),
-        }),
-      });
+      const response = await fetch(
+        "https://botzone.herokuapp.com/" + `api/product/cart`,
+        {
+          method: "POST",
+          mode: "cors",
+          credentials: "same-origin",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            listCart: listProductId.join(","),
+          }),
+        }
+      );
       const data = await response.json();
       setReceiptProducts(data.data);
     };
@@ -37,7 +40,7 @@ function ReceiptPage() {
     if (state.info != "") {
       const fetchResult = async () => {
         const result = await fetch(
-          process.env.beurl + `api/receipt/` + state.info.sub,
+          "https://botzone.herokuapp.com/" + `api/receipt/` + state.info.sub,
           {
             method: "GET",
             mode: "cors",

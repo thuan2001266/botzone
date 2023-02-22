@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ProductItem, Products } from "../interface";
 import { useStore, actions } from "../store";
 export async function getServerSideProps() {
-  const result = await fetch(process.env.beurl + `api/product`);
+  const result = await fetch("https://botzone.herokuapp.com/" + `api/product`);
   const data = await result.json();
   return { props: { products: data.data } };
 }
@@ -62,14 +62,17 @@ function Manage({ products }: { products: Products[] }) {
       const tempRef1: HTMLInputElement = ref.current;
       const tempRef2: HTMLInputElement = ref2.current;
       if (tempRef1.checked) {
-        destination = process.env.beurl + "api/manage/addProduct";
+        destination =
+          "https://botzone.herokuapp.com/" + "api/manage/addProduct";
         method = "POST";
       } else {
         if (tempRef2.checked) {
-          destination = process.env.beurl + "api/manage/updateProduct";
+          destination =
+            "https://botzone.herokuapp.com/" + "api/manage/updateProduct";
           method = "POST";
         } else {
-          destination = process.env.beurl + "api/manage/deleteProduct";
+          destination =
+            "https://botzone.herokuapp.com/" + "api/manage/deleteProduct";
           method = "POST";
         }
       }
@@ -127,7 +130,7 @@ function Manage({ products }: { products: Products[] }) {
             setMessage("Phiên đăng nhập vừa được làm mới!");
           }
         } else {
-          fetch(process.env.beurl + "api/product")
+          fetch("https://botzone.herokuapp.com/" + "api/product")
             .then((response) => response.json())
             .then((data) => setTheData(data.data));
         }

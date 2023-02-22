@@ -13,7 +13,7 @@ function Detail() {
         const fetchResult = async () => {
             if (state.search != "") {
                 const result = await fetch(
-                    process.env.beurl +`api/product/search/` + state.search,
+                    "https://botzone.herokuapp.com/" +`api/product/search/` + state.search,
                     {
                         method: "GET",
                         mode: "cors",

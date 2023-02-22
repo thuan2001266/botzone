@@ -13,18 +13,21 @@ function Verification() {
       const { token } = router.query;
       const tempToken = token + "";
       const verificate = async () => {
-        const result = await fetch(process.env.beurl + `api/verificate`, {
-          method: "POST",
-          mode: "cors",
-          credentials: "same-origin",
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams({
-            token: tempToken,
-          }),
-        });
+        const result = await fetch(
+          "https://botzone.herokuapp.com/" + `api/verificate`,
+          {
+            method: "POST",
+            mode: "cors",
+            credentials: "same-origin",
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              token: tempToken,
+            }),
+          }
+        );
         const data = await result.json();
         setResult(data.message);
       };

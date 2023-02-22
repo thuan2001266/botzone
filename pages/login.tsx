@@ -13,7 +13,7 @@ function Login() {
   const router = useRouter();
   let data;
   const loginAut = async () => {
-    const response = await fetch(process.env.beurl + `login`, {
+    const response = await fetch("https://botzone.herokuapp.com/" + `login`, {
       method: "POST",
       mode: "cors",
       headers: {
