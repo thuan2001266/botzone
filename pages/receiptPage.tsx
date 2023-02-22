@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Products, receipt, toCart } from "../interface";
 import Header from "../components/Header";
 
-function receiptPage() {
+function ReceiptPage() {
   const [state, dispatch] = useStore();
   const [historyData, setHistoryData] = useState<Array<receipt>>();
   const [listProductId, setListProductId] = useState<Array<string>>([]);
@@ -255,4 +255,4 @@ function receiptPage() {
   );
 }
 
-export default receiptPage;
+export default ReceiptPage;
