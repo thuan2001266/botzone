@@ -34,7 +34,7 @@ function Cart() {
 
     const fetchCart = async () => {
       const response = await fetch(
-        `"https://botzone.herokuapp.com/"api/product/cart`,
+        `https://botzone.herokuapp.com/api/product/cart`,
         {
           method: "POST",
           mode: "cors",
@@ -112,7 +112,7 @@ function Cart() {
 
     const addReceipt = async () => {
       const response = await fetch(
-        "https://botzone.herokuapp.com/" + `api/addReceipt`,
+        `https://botzone.herokuapp.com/api/addReceipt`,
         {
           method: "POST",
           mode: "cors",
