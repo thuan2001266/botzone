@@ -45,7 +45,7 @@ function Header() {
     <div className="bg-[#101010] ">
       <div className="relative">
         {searchVisibility && (
-          <div className="absolute bg-[#030303] w-full h-full z-10 flex content-center justify-center m-auto">
+          <div className="absolute bg-[#030303] w-full h-full z-10 flex content-center justify-center m-auto left-0 right-0">
             <div className="w-1/2 m-auto flex">
               <div>
                 <div onClick={reloadPage}>

@@ -33,18 +33,21 @@ function Cart() {
     );
 
     const fetchCart = async () => {
-      const response = await fetch(`http://localhost:8080/api/product/cart`, {
-        method: "POST",
-        mode: "cors",
-        credentials: "same-origin",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          listCart: productIdArr.join(","),
-        }),
-      });
+      const response = await fetch(
+        `"https://botzone.herokuapp.com/"api/product/cart`,
+        {
+          method: "POST",
+          mode: "cors",
+          credentials: "same-origin",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            listCart: productIdArr.join(","),
+          }),
+        }
+      );
       const data = await response.json();
       setProductCart(data.data);
       if (state.token != "") {
@@ -108,20 +111,23 @@ function Cart() {
     }
 
     const addReceipt = async () => {
-      const response = await fetch(process.env.beurl + `api/addReceipt`, {
-        method: "POST",
-        mode: "cors",
-        credentials: "same-origin",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          list: listProduct,
-          user: user,
-          method: method,
-        }),
-      });
+      const response = await fetch(
+        "https://botzone.herokuapp.com/" + `api/addReceipt`,
+        {
+          method: "POST",
+          mode: "cors",
+          credentials: "same-origin",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            list: listProduct,
+            user: user,
+            method: method,
+          }),
+        }
+      );
     };
     addReceipt();
     dispatch(clearCart());
