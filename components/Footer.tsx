@@ -4,7 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 function Footer() {
   let logoV = Object.values(logo);
   return (
-    <div className="w-full bg-[#101010] mt-16 pb-16">
+    <div className="w-full bg-[#101010] mt-16 pb-16 mb-0">
       <div className="w-4/5 m-auto">
         <div>
           <img src={logoV[0].src} alt="" />

@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
-
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { imageCarousel } from "../interface";
-import { StaticImageData } from "next/image";
-let count = 0;
-function Carousel({ images }: { images: StaticImageData[] }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+function Carousel({ images }: { images: { big: string[]; small: string[] } }) {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [imageType, setImageType] = useState<string>();
 
   const handleOnPrevClick = () => {
-    const productsLength = images.length;
-    count = (currentIndex + productsLength - 1) % productsLength;
-    setCurrentIndex(count);
+    const productsLength = images.big.length;
+    setCurrentIndex((currentIndex + productsLength - 1) % productsLength);
   };
   const handleOnNextClick = () => {
-    count = (count + 1) % images.length;
-    setCurrentIndex(count);
+    const productsLength = images.big.length;
+    setCurrentIndex((currentIndex + productsLength + 1) % productsLength);
   };
 
   useEffect(() => {
@@ -25,23 +21,40 @@ function Carousel({ images }: { images: StaticImageData[] }) {
     return () => clearInterval(startSlider);
   }, [currentIndex]);
 
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setImageType("small");
+    } else {
+      setImageType("big");
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize, false);
+  }, []);
+
   return (
     <div className="w-full m-auto">
       <div className="w-full relative select-none ">
         <div className="w-full">
           <img
-            src={images[currentIndex].src}
+            src={
+              imageType == "big"
+                ? images.big[currentIndex]
+                : images.small[currentIndex]
+            }
             alt=""
-            // className="w-full object-cover transition duration-500 ease-in-out"
-            // style="transition: transform 0.5s ease;"
             className={`min-h-[350px] w-full object-cover`}
-            // style={{ transition: "all 0.5s ease-in-out" }}
           />
         </div>
 
         <div className="absolute w-full bottom-6 flex">
           <div className="m-auto flex">
-            {images.map((e, i) => {
+            {images.big.map((e, i) => {
               return (
                 <div
                   key={i}

@@ -24,5 +24,19 @@ module.exports = {
         // your project has ESLint errors.
         ignoreDuringBuilds: true,
       },
+
+    images: {
+        domains: ['cdn.tgdd.vn'],
+      },
+    // images: {
+    //     remotePatterns: [
+    //       {
+    //         protocol: 'https',
+    //         hostname: 'cdn.tgdd.vn',
+    //         port: '',
+    //         pathname: '/**',
+    //       },
+    //     ],
+    //   },
 };
 module.exports = nextConfig;

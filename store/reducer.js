@@ -4,8 +4,8 @@ import {
     SET_SEARCH,
     SET_SEARCHMESSAGE,
     SET_TOKEN,
+    SET_REFRESHTOKEN,
     CLEAR_CART,
-    REMOVE_FROME_CART,
     CHANGE_QUAN_CART,
     REMOVE_FROM_CART,
     ADD_CART,
@@ -18,6 +18,7 @@ const initState = {
     searchMessage: "",
     cart: [],
     token: "",
+    refreshToken: "",
     info: "",
 };
 
@@ -84,12 +85,16 @@ function reducer(state, action) {
                     ).toString()
                 );
             }
-
             //{sub: 'user1', roles: 'ROLE_ADMIN, ROLE_USER', iss: 'http://localhost:8080/login', exp: 1670316867}
             return {
                 ...state,
                 token: action.payload,
                 info: info,
+            };
+        case SET_REFRESHTOKEN:
+            return {
+                ...state,
+                refreshToken: action.payload,
             };
         case CLEAR_CART:
             return { ...state, cart: [] };

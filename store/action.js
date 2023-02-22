@@ -4,6 +4,7 @@ import {
     SET_SEARCHMESSAGE,
     SET_CART,
     SET_TOKEN,
+    SET_REFRESHTOKEN,
     CLEAR_CART,
     CHANGE_QUAN_CART,
     REMOVE_FROM_CART,
@@ -54,6 +55,11 @@ export const editQuanInCart = (payload) => ({
 
 export const setToken = (payload) => ({
     type: SET_TOKEN,
+    payload,
+});
+
+export const setRefreshToken = (payload) => ({
+    type: SET_REFRESHTOKEN,
     payload,
 });
 

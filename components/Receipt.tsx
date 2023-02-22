@@ -8,7 +8,7 @@ function Receipt({
   receiptProductsProp: Products[];
 }) {
   return (
-    <div className="absolute left-[-280px] top-11 w-[300px] z-50 bg-[#3e3e3f] rounded-2xl pb-3 ">
+    <div className="absolute right-[360%] top-11 w-[300px] z-50 bg-[#3e3e3f] rounded-2xl pb-3 ">
       {historyDataProp.map((e) => (
         <div className="px-3 pt-2" key={e.id + "e" + e.addresses}>
           <div>

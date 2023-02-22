@@ -1,3 +1,5 @@
+import { Long } from "bson";
+
 export interface Products {
   id: string;
   name: string;
@@ -67,6 +69,7 @@ export interface receipt {
   user: user;
   addresses: toCart[];
   method: string;
+  mili: string;
 }
 
 export interface imageCarousel {

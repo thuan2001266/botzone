@@ -15,7 +15,7 @@ function Login() {
   const loginAut = async () => {
     const response = await fetch(process.env.beurl + `login`, {
       method: "POST",
-      // mode: "no-cors",
+      mode: "cors",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -27,9 +27,10 @@ function Login() {
     try {
       data = await response.json();
       if (data.access_token) {
-        console.log("ok");
-
+        console.log(data.access_token);
+        console.log(data.refresh_token);
         dispatch(actions.setToken(data.access_token));
+        dispatch(actions.setRefreshToken(data.refresh_token));
         router.push("/");
       } else {
         setMessage(data.message);
@@ -60,10 +61,10 @@ function Login() {
               />
             </div>
           </Link>
-          <div className="sm:w-2/3 md:w-[520px] bg-[#323232] m-auto rounded-xl p-5 shadow-2xl mt-4">
+          <div className=" md:w-[520px] bg-[#323232] m-auto rounded-xl p-5 shadow-2xl mt-4">
             <h2 className="font-medium text-4xl text-center">Login</h2>
             <form action="" className="space-y-4 mt-6">
-              <div className="flex sm:flex-col md:flex-row">
+              <div className="flex flex-col md:flex-row">
                 <div className="w-[90px]">Username:</div>
                 <div className="flex-1 color-black">
                   <input
@@ -74,7 +75,7 @@ function Login() {
                   />
                 </div>
               </div>
-              <div className="flex sm:flex-col md:flex-row">
+              <div className="flex flex-col md:flex-row">
                 <div className="w-[90px]">Password:</div>
                 <div className="flex-1 color-black">
                   <input

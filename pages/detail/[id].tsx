@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { ProductItem, Products, toCart } from "../../interface";
 import { useStore, actions } from "../../store";
+import Image from "next/image";
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.beurl + "api/product");
   const data = await res.json();
@@ -31,8 +32,6 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
 
 function Detail({ product }: ProductItem) {
   const [state, dispatch] = useStore();
-  const [storage, setStorage] = useState(0);
-  const [color, setColor] = useState(0);
   const [infoToCart, setInfoToCart] = useState<toCart>({
     id: product.id,
     spec: 0,
@@ -52,14 +51,14 @@ function Detail({ product }: ProductItem) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div>
-          <div className="w-4/5 m-auto flex pt-5">
-            <div className="w-1/2 mr-3 relative">
+          <div className="w-4/5 m-auto flex pt-5 md:flex-row flex-col">
+            <div className="md:w-1/2 w-full mr-3 relative">
               <div className="sticky">
                 <img src={product.img[infoToCart.color]} alt="" />
               </div>
               <div></div>
             </div>
-            <div className="w-1/2 ml-2">
+            <div className="md:w-1/2 w-full ml-2 md:mt-0 mt-6">
               <h1 className="text-4xl font-extrabold">{product.name}</h1>
               <h2 className="text-3xl font-bold mt-3">
                 {product.price[infoToCart.spec]}₫

@@ -60,11 +60,11 @@ function Register() {
               />
             </div>
           </Link>
-          <div className="sm:w-2/3 md:w-[520px] bg-[#323232] m-auto rounded-xl p-5 shadow-2xl mt-4">
+          <div className="sm:w-[520px] md:w-[520px] bg-[#323232] m-auto rounded-xl p-5 shadow-2xl mt-4">
             <h2 className="font-medium text-4xl text-center">Register</h2>
             <form action="" className="space-y-4 mt-6">
-              <div className="flex">
-                <div className="w-1/4">Email:</div>
+              <div className="flex flex-col sm:flex-row">
+                <div className="w-1/4 pb-2 sm:pb-0">Email:</div>
                 <div className="flex-1 color-black">
                   <input
                     onChange={(e) => setEmail(e.target.value)}
@@ -74,8 +74,8 @@ function Register() {
                   />
                 </div>
               </div>
-              <div className="flex">
-                <div className="w-1/4">Username:</div>
+              <div className="flex flex-col sm:flex-row">
+                <div className="w-1/4 pb-2 sm:pb-0">Username:</div>
                 <div className="flex-1 color-black">
                   <input
                     onChange={(e) => setUserName(e.target.value)}
@@ -85,8 +85,8 @@ function Register() {
                   />
                 </div>
               </div>
-              <div className="flex">
-                <div className="w-1/4">Password:</div>
+              <div className="flex flex-col sm:flex-row">
+                <div className="w-1/4 pb-2 sm:pb-0">Password:</div>
                 <div className="flex-1 color-black">
                   <input
                     onChange={(e) => setPassword(e.target.value)}
@@ -96,8 +96,8 @@ function Register() {
                   />
                 </div>
               </div>
-              <div className="flex space-x-2">
-                <div>Đã có tài khoản? </div>
+              <div className="flex space-x-2 justify-center sm:justify-start">
+                <div className="hidden sm:block">Đã có tài khoản? </div>
                 <Link href="/login">
                   <div className="cursor-pointer ml-2 font-bold">Đăng nhập</div>
                 </Link>

@@ -20,11 +20,11 @@ function ProductGrid({
           id="itemCard"
           className="hover:shadow-2xl rounded-3xl mx-[6px] my-[8px] bg-[#323232] pb-9 pt-12 sliderCard flex flex-col items-center h-full" //
         >
-          <div className="max-w-[95%]">
+          <div className="max-w-[95%] pb-2">
             <img className="object-contain" src={image} alt="" />
           </div>
-          <div className="text-center py-3 w-5/6">{name}</div>
-          <div>{price}₫</div>
+          <div className="pb-2 w-5/6 text-center">{name}</div>
+          <div className="font-medium text-lg">{price}₫</div>
         </div>
       </div>
     </Link>

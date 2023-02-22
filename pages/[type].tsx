@@ -10,6 +10,7 @@ import Carousel from "../components/Carousel";
 import iphoneImageImport from "../assets/typeImages/iphone";
 import ipadImageImport from "../assets/typeImages/ipad";
 import macImageImport from "../assets/typeImages/mac";
+import { iphone, ipad, mac } from "../assets/imageLink/imageLink";
 
 export const getStaticPaths = async () => {
   const res = await fetch(process.env.beurl + "api/product");
@@ -86,17 +87,12 @@ function Type({
   productType: string;
 }) {
   const [type, setType] = useState("Tất cả");
-  const [order, setOrder] = useState("Mới ra mắt");
+  const [order, setOrder] = useState("Mới");
   const [orderScreen, setOrderScreen] = useState<boolean>(false);
-  // const [changeSortType, setChangeSortType] = useState<boolean>(false);
   const [productData, setProductData] = useState<Products[]>();
 
-  let iphoneImage = Object.values(iphoneImageImport);
-  let ipadImage = Object.values(ipadImageImport);
-  let macImage = Object.values(macImageImport);
-
   const sortProduct = (orderType: string) => {
-    if (orderType == "Mới ra mắt") {
+    if (orderType == "Mới") {
       setProductData(
         product.sort(function (a: Products, b: Products) {
           if (a.name > b.name) return -1;
@@ -158,21 +154,32 @@ function Type({
             <Carousel
               images={
                 productType == "iPhone"
-                  ? iphoneImage
+                  ? iphone
                   : productType == "Mac"
-                  ? macImage
-                  : ipadImage
+                  ? mac
+                  : ipad
               }
             ></Carousel>
           </div>
           <div className="w-4/5 m-auto py-5 flex justify-start ">
             <ul className="flex child:mr-6 child:mt-2 flex-wrap">
-              <li onClick={() => setType("Tất cả")} className="cursor-pointer">
+              <li
+                onClick={() => setType("Tất cả")}
+                className={
+                  type == "Tất cả"
+                    ? "cursor-pointer border-b border-b-white"
+                    : "cursor-pointer"
+                }
+              >
                 Tất cả
               </li>
               {typeList.map((typelist) => (
                 <li
-                  className="cursor-pointer"
+                  className={
+                    type == typelist
+                      ? "cursor-pointer border-b border-b-white"
+                      : "cursor-pointer"
+                  }
                   key={typelist}
                   onClick={() => setType(typelist)}
                 >
@@ -201,11 +208,11 @@ function Type({
                   <ul className="space-y-2 py-3">
                     <li
                       onClick={() => {
-                        sortProduct("Mới ra mắt");
-                        setOrder("Mới ra mắt");
+                        sortProduct("Mới");
+                        setOrder("Mới");
                       }}
                     >
-                      Mới ra mắt
+                      Mới
                     </li>
                     {/* <li onClick={() => setOrder("Bán chạy")}>Bán chạy</li> */}
                     <li
@@ -228,7 +235,7 @@ function Type({
                 </div>
               )}
             </div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto gap-y-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto gap-y-5">
               {productData &&
                 productData.map((product) => (
                   <ProductGrid

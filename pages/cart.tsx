@@ -19,16 +19,21 @@ function Cart() {
   const [done, setDone] = useState<boolean>(false);
   const ref = useRef(null);
 
-  const productIdArr: Array<string> = state.cart.reduce(
-    (result: Array<string>, curr: toCart) => {
-      result.push(curr.id);
-      return result;
-    },
-    []
-  );
+  //fetch data by list of id
   useEffect(() => {
+    //list of cart product id
+    const productIdArr: Array<string> = state.cart.reduce(
+      (result: Array<string>, curr: toCart) => {
+        if (!result.includes(curr.id)) {
+          result.push(curr.id);
+        }
+        return result;
+      },
+      []
+    );
+
     const fetchCart = async () => {
-      const response = await fetch(process.env.beurl + `api/product/cart`, {
+      const response = await fetch(`http://localhost:8080/api/product/cart`, {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",
@@ -50,7 +55,7 @@ function Cart() {
               Number(e.quant) *
                 Number(
                   data.data
-                    .find((ein: Products) => (ein.id = e.id))
+                    .find((ein: Products) => ein.id == e.id)
                     .price[e.spec].replaceAll(".", "")
                 )
             );
@@ -58,32 +63,41 @@ function Cart() {
         );
       }
     };
-    fetchCart();
+    if (productIdArr && productIdArr.length > 0) {
+      fetchCart();
+    }
   }, []);
 
+  //sum of price
   useEffect(() => {
     if (productCart && productCart.length > 0) {
       setSum(
         state.cart.reduce((s: number, e: toCart) => {
-          let tempPrice = productCart.find((ein: Products) => (ein.id = e.id));
           return (
             s +
             Number(e.quant) *
-              Number(tempPrice?.price[e.spec].replaceAll(".", ""))
+              Number(
+                productCart
+                  ?.find((ein: Products) => ein.id == e.id)
+                  ?.price[e.spec].replaceAll(".", "")
+              )
           );
         }, 0)
       );
     }
   }, [state.cart]);
 
+  // //remove from cart
   const removeFromCart = (obj: toCart) => {
     dispatch(actions.removeFromCart(obj));
   };
 
+  // //change quantity
   const editQuan = (obj: changeQuanCart) => {
     dispatch(actions.editQuanInCart(obj));
   };
 
+  // //purchase
   const purchase = () => {
     const listProduct = state.cart;
     const user = state.info.sub;
@@ -93,7 +107,6 @@ function Cart() {
       method = tempRef.checked ? "store" : "home";
     }
 
-    // let method = ref.current.checked ? "store" : "home";
     const addReceipt = async () => {
       const response = await fetch(process.env.beurl + `api/addReceipt`, {
         method: "POST",
@@ -101,7 +114,6 @@ function Cart() {
         credentials: "same-origin",
         headers: {
           accept: "application/json",
-          // "Content-Type": "application/x-www-form-urlencoded",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -136,7 +148,7 @@ function Cart() {
             </div>
           ) : state.cart.length != 0 ? (
             <div className="w-full h-fit m-auto bg-[#f0f0f0] text-[#897560]">
-              <div className="w-1/2 m-auto flex justify-between py-2">
+              <div className="w-4/5 md:w-3/5 lg:w-2/3 m-auto flex justify-between py-2">
                 <Link href={"/"}>
                   <div className="ml-2 flex cursor-pointer">
                     <div>
@@ -147,19 +159,22 @@ function Cart() {
                 </Link>
                 <div className="mr-2">Giỏ hàng:</div>
               </div>
-              <div className="w-1/2 bg-[#ffffff] m-auto rounded-2xl shadow-xl ">
+              <div className="w-4/5 md:w-3/5 lg:w-2/3 bg-[#ffffff] m-auto rounded-2xl shadow-xl ">
                 <div>
                   {state.cart &&
                     state.cart.map((p: toCart) => {
                       const itemData = productCart.find((obj) => {
                         return obj.id == p.id;
                       });
-                      if (itemData)
+                      if (itemData) {
                         return (
                           <div
+                            key={
+                              p.id + "" + p.color + "" + p.quant + "" + p.spec
+                            }
                             className="flex w-full px-5 pt-4 text-black"
-                            key={p.id}
                           >
+                            {/* image + delete button */}
                             <div className="flex flex-col justify-center">
                               <div className="w-[90px] object-contain">
                                 <img src={itemData.img[p.color]} alt="" />
@@ -171,62 +186,70 @@ function Cart() {
                                 <span className="cursor-pointer">Xóa</span>
                               </div>
                             </div>
-                            <div className="flex-1 px-7">
-                              Tên sản phẩm: {itemData.name}
-                            </div>
-                            <div>
-                              <div className="flex">
-                                Giá sản phẩm:{" "}
-                                <div className="font-medium pl-2">
-                                  {itemData.price[p.spec]}₫
+                            <div className="flex flex-col lg:flex-row justify-between w-full">
+                              {/* product name + spec */}
+                              <div className="flex-1 md:px-7">
+                                <div>
+                                  Tên sản phẩm:{" "}
+                                  <span className="font-medium">
+                                    {itemData.name}
+                                  </span>
+                                </div>
+                                <div>
+                                  Thông tin:{" "}
+                                  <span className="font-medium">
+                                    {itemData.optionToBuy[p.spec] +
+                                      " | " +
+                                      itemData.color[p.color]}
+                                  </span>
                                 </div>
                               </div>
-                              <div>
-                                <div className="my-3">Số lượng:</div>
-                                <div className="flex space-x-3">
-                                  <div
-                                    onClick={() =>
-                                      editQuan({ object: p, action: "sub" })
-                                    }
-                                    className="cursor-pointer border border-solid w-5 text-center rounded-sm"
-                                  >
-                                    -
+                              {/* price + quantity */}
+                              <div className="md:px-7 pt-2 md:pt-0">
+                                <div className="flex">
+                                  Giá sản phẩm:{" "}
+                                  <div className="font-medium pl-2">
+                                    {itemData.price[p.spec]}₫
                                   </div>
-                                  <div className="border-solid w-5 text-center rounded-sm border bg-[#f5f5f7]">
-                                    {p.quant}
-                                  </div>
-                                  <div
-                                    onClick={() =>
-                                      editQuan({ object: p, action: "add" })
-                                    }
-                                    className="cursor-pointer border border-solid w-5 text-center rounded-sm"
-                                  >
-                                    +
+                                </div>
+                                <div className="flex my-3">
+                                  <div className="">Số lượng:</div>
+                                  <div className="flex space-x-2 ml-2">
+                                    <div
+                                      onClick={() =>
+                                        editQuan({ object: p, action: "sub" })
+                                      }
+                                      className="cursor-pointer border border-solid w-5 text-center rounded-sm"
+                                    >
+                                      -
+                                    </div>
+                                    <div className="border-solid w-5 text-center rounded-sm border bg-[#f5f5f7]">
+                                      {p.quant}
+                                    </div>
+                                    <div
+                                      onClick={() =>
+                                        editQuan({ object: p, action: "add" })
+                                      }
+                                      className="cursor-pointer border border-solid w-5 text-center rounded-sm"
+                                    >
+                                      +
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         );
+                      }
                     })}
                 </div>
-                <div className="px-5 mt-3 text-md justify-between flex text-black pb-7">
-                  <div>Hình thức nhận hàng:</div>
-                  <div className="flex space-x-3">
-                    <input
-                      ref={ref}
-                      type="radio"
-                      defaultChecked
-                      value="atshop"
-                      name="get"
-                    />{" "}
-                    <div className="ml-1">Nhận tại cửa hàng</div>
-                    <input type="radio" value="athome" name="get" />{" "}
-                    <div className="ml-1">Giao tận nhà</div>
+                <div className="px-5 mt-0 md:mt-3 text-lg font-medium justify-between flex text-black pb-7 flex-col sm:flex-row">
+                  <div>
+                    Số sản phẩm:{" "}
+                    {state.cart.reduce((productNum: number, curr: toCart) => {
+                      return productNum + curr.quant;
+                    }, 0)}
                   </div>
-                </div>
-                <div className="px-5 mt-3 text-lg font-medium justify-between flex text-black pb-7">
-                  <div>Số sản phẩm: {productCart.length}</div>
                   <div className="flex">
                     Tổng tiền:{" "}
                     <div className="text-red-600 ml-2">

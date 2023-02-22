@@ -99,23 +99,38 @@ function Manage({ products }: { products: Products[] }) {
       let data;
       try {
         data = await response.json();
+        console.log(data);
+
         setMessage(data.message);
 
-        fetch(process.env.beurl + "api/product")
-          .then((response) => response.json())
-          .then((data) => setTheData(data.data));
-        // const reFetchData = async () => {
-        //     const result = await fetch(
-        //         `http://localhost:8080/api/product`
-        //     );
-        //     const data = await result.json();
-        //     console.log(data);
-
-        //     setTheData(data.data);
-        // };
-        // console.log("refetch");
-
-        // reFetchData;
+        if (
+          data &&
+          data.error_message &&
+          data.error_message.includes("The Token has expired")
+        ) {
+          const refreshToken = await fetch(
+            "http://localhost:8080/api/refreshToken",
+            {
+              method: "GET",
+              mode: "cors",
+              credentials: "same-origin",
+              headers: {
+                Accept: "application/json",
+                Authorization: "Nauht " + state.refreshToken,
+              },
+            }
+          );
+          const newToken = await refreshToken.json();
+          if (newToken.access_token) {
+            dispatch(actions.setToken(newToken.access_token));
+            dispatch(actions.setRefreshToken(newToken.refresh_token));
+            setMessage("Phiên đăng nhập vừa được làm mới!");
+          }
+        } else {
+          fetch(process.env.beurl + "api/product")
+            .then((response) => response.json())
+            .then((data) => setTheData(data.data));
+        }
       } catch (e) {
         console.log(e);
       }
@@ -168,6 +183,7 @@ function Manage({ products }: { products: Products[] }) {
                     value={iImage}
                     onChange={(e) => setiImage(e.target.value)}
                     cols={3}
+                    rows={8}
                     className="text-black px-2 py-1 rounded-md mb-2 w-full"
                   />
                 </div>

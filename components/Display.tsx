@@ -1,14 +1,32 @@
 import AppleIcon from "@mui/icons-material/Apple";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Link from "next/link";
-// import fetch from "node-fetch";
 import { useEffect, useState, useRef } from "react";
 import Product from "../components/Product";
-import { info } from "../interface";
+import { info, Products } from "../interface";
 
 function Display({ type, data }: info) {
   const [link, setLink] = useState<string>();
+  const [productData, setProductData] = useState<Products[]>();
+
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setProductData(data.slice(0, 4));
+    } else {
+      setProductData(data);
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize, false);
+  }, []);
+
   useEffect(() => {
     console.log(window.innerWidth);
     if (data.length != 0) {
@@ -16,20 +34,6 @@ function Display({ type, data }: info) {
     } else {
       setLink("");
     }
-    // let divi;
-    // if (window.matchMedia("(min-width: 640px)").matches) {
-    //   if (window.matchMedia("(min-width: 768px)").matches) {
-    //     if (window.matchMedia("(min-width: 1024px)").matches) {
-    //       divi = 4;
-    //     } else {
-    //       divi = 3;
-    //     }
-    //   } else {
-    //     divi = 2;
-    //   }
-    // } else {
-    //   divi = 1;
-    // }
     document.querySelector("#previphone")?.addEventListener("click", () => {
       let iPhoneQuery = document.querySelector("#siphone") as HTMLElement;
       if (iPhoneQuery != undefined && iPhoneQuery != null) {
@@ -80,23 +84,34 @@ function Display({ type, data }: info) {
           </Link>
         </div>
         <div
-          className="flex m-auto mt-7 overflow-x-scroll"
+          className="flex m-auto mt-7 sm:overflow-x-scroll flex-wrap sm:flex-nowrap"
           id={
             type == "iPhone" ? "siphone" : type == "Macbook" ? "smac" : "sipad"
           }
         >
-          {data.map((product) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              image={product.img[0]}
-              name={product.name + " " + product.optionToBuy[0]}
-              price={product.price[0]}
-            />
-          ))}
+          {productData &&
+            productData.map((product, i) => (
+              <Product
+                key={product.id}
+                id={product.id}
+                image={product.img[0]}
+                name={product.name + " " + product.optionToBuy[0]}
+                price={product.price[0]}
+              />
+            ))}
         </div>
       </div>
-      <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-between">
+      <div className="absolute w-full top-[102%] sm:hidden justify-center flex">
+        <Link href={"/" + type.toLowerCase()}>
+          <div className="cursor-pointer text-[#1981dc] flex">
+            {"Xem tất cả " + type + " "}
+            <div>
+              <ChevronRightIcon></ChevronRightIcon>
+            </div>
+          </div>
+        </Link>
+      </div>
+      <div className="absolute w-full top-1/2 transform -translate-y-1/2 sm:flex justify-between hidden">
         <button
           className="bg-[#68635c] rounded-full p-[6px] ml-2 sm:ml-3 md:ml-12 lg:ml-16"
           id={

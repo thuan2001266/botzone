@@ -16,7 +16,7 @@ function Product({
   // const [option, setOption] = useState(false);
   return (
     <Link href={`/detail/${id}`}>
-      <div className="lg:min-w-[25%] md:min-w-[33.33%] sm:min-w-[50%]  min-w-[100%] relative">
+      <div className="lg:min-w-[25%] md:min-w-[33.33%] sm:min-w-[33.33%]  w-[50%] relative pt-3 sm:pt-0">
         <div
           key={id}
           id="itemCard"

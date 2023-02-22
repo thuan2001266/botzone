@@ -4,24 +4,16 @@ import Layout from "../components/Layout";
 import ProductGrid from "../components/ProductGrid";
 import { actions, useStore } from "../store";
 
-// export async function getServerSideProps() {
-//     const result = await fetch(`http://localhost:8080/api/product`);
-//     const data = await result.json();
-//     return { props: { products: data.data } };
-// }
-
 function Detail() {
     const [state, dispatch] = useStore();
     const [productBySearch, setProductBySearch] = useState([]);
     let message = state.search;
-    console.log(state.searchMessage);
-    console.log(message);
 
     useEffect(() => {
         const fetchResult = async () => {
             if (state.search != "") {
                 const result = await fetch(
-                    process.env.beurl + `api/product/search/` + state.search,
+                    process.env.beurl +`api/product/search/` + state.search,
                     {
                         method: "GET",
                         mode: "cors",
@@ -44,7 +36,7 @@ function Detail() {
                         actions.setSearchMessage(
                             `Không tìm thấy sản phẩm với từ khóa "` +
                                 state.search +
-                                `":`
+                                `"`
                         )
                     );
                 }
@@ -67,76 +59,9 @@ function Detail() {
 
             <div className="pt-5">
                 <div className="flex justify-center items-center">
-                    <div>{/* <AppleIcon className="text-4xl" /> */}</div>
                     <h2 className="text-4xl">{}</h2>
                 </div>
-                {/* <div className="w-4/5 m-auto py-5 flex justify-start">
-                    <ul className="flex space-x-7">
-                        <li
-                            onClick={() => setType("Tất cả")}
-                            className="cursor-pointer"
-                        >
-                            Tất cả
-                        </li>
-                        {typeList.map((typelist) => (
-                                <li
-                                    className="cursor-pointer"
-                                    key={typelist}
-                                    onClick={() => setType(typelist)}
-                                >
-                                    {typelist}
-                                </li>
-                            ))}
-                    </ul>
-                </div> */}
                 <div>
-                    <div
-                        className="w-4/5 justify-end flex m-auto cursor-pointer relative select-none"
-                        // onClick={() => {
-                        //     setOrderScreen((prev) => !prev);
-                        // }}
-                    >
-                        {/* Xếp theo: {order} */}
-                        <div>
-                            {/* {orderScreen ? (
-                                    <KeyboardArrowUpIcon />
-                                ) : (
-                                    <KeyboardArrowDownIcon />
-                                )} */}
-                        </div>
-                        {/* {orderScreen && (
-                                <div className="absolute top-[110%] right-0 bg-white rounded-2xl text-black px-5 mt-3">
-                                    <ul className="space-y-2 py-3">
-                                        <li
-                                            onClick={() =>
-                                                setOrder("Mới ra mắt")
-                                            }
-                                        >
-                                            Mới ra mắt
-                                        </li>
-                                        <li
-                                            onClick={() => setOrder("Bán chạy")}
-                                        >
-                                            Bán chạy
-                                        </li>
-                                        <li
-                                            onClick={() =>
-                                                setOrder("Giá thấp đến cao")
-                                            }
-                                        >
-                                            Giá thấp đến cao
-                                        </li>
-                                        <li
-                                            onClick={() =>
-                                                setOrder("Giá cao đến thấp")
-                                            }
-                                        >
-                                            Giá cao đến thấp
-                                        </li>
-                                    </ul>
-                                </div>
-                            )} */}
-                    </div>
                     <div className="w-4/5 m-auto">
                         <div>
                             {productBySearch ? (
@@ -144,13 +69,13 @@ function Detail() {
                                     {state.searchMessage}
                                 </h2>
                             ) : (
-                                <h2 className="text-xl ml-6 mt-3 mb-3">
+                                <h2 className="text-xl ml-6 my-20 text-center">
                                     {state.searchMessage}
                                 </h2>
                             )}
                         </div>
                     </div>
-                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto gap-y-5">
                         {productBySearch ? (
                             productBySearch.map((product) => (
                                 <ProductGrid
@@ -172,10 +97,6 @@ function Detail() {
                     </div>
                 </div>
             </div>
-
-            {/* <div>{productBySearch.map(e=> (
-                
-            ))}</div> */}
         </Layout>
     );
 }
