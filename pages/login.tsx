@@ -87,6 +87,10 @@ function Login() {
                 </div>
               </div>
               <div className="flex space-x-2">
+                <div>user/123123123</div>
+                <div>admin/123123123</div>
+              </div>
+              <div className="flex space-x-2">
                 <div>Chưa có tài khoản? </div>
                 <Link href="/register">
                   <div className="cursor-pointer ml-2 font-bold">Đăng ký</div>
