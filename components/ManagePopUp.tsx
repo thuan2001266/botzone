@@ -440,7 +440,8 @@ function ManagePopUp({
         )}
         {popType != "delete" && (
           <div className="mt-3 w-[88%] absolute bottom-12 space-x-8 py-2 text-center text-sm text-[#29191a]">
-            Lưu ý: Nội dung chứa từ 2 phần tử cần được phân tách bằng dấu ","
+            Lưu ý: Nội dung chứa từ 2 phần tử cần được phân tách bằng dấu
+            `&quot;`,`&quot;`
           </div>
         )}
         <div className="flex mt-3 w-[88%] absolute bottom-2 space-x-8 py-2 align-middle justify-center">
