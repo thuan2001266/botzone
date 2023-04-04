@@ -16,7 +16,7 @@ import {
 import ProductList from "../components/ProductList";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:8080/" + "api/product");
+  const res = await fetch("https://botzone.herokuapp.com/" + "api/product");
   const data = await res.json();
 
   const temppaths = data.data.map((a: Products) => {
@@ -70,7 +70,7 @@ export const getStaticProps = async (context: contextType) => {
   }
 
   const res = await fetch(
-    "http://localhost:8080/" + `api/product/type/` + type
+    "https://botzone.herokuapp.com/" + `api/product/type/` + type
   );
   const data = await res.json();
 

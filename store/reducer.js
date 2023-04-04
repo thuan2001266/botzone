@@ -107,7 +107,7 @@ function reducer(state, action) {
                     ).toString()
                 );
             }
-            //{sub: 'user1', roles: 'ROLE_ADMIN, ROLE_USER', iss: 'http://localhost:8080/login', exp: 1670316867}
+            //{sub: 'user1', roles: 'ROLE_ADMIN, ROLE_USER', iss: 'https://botzone.herokuapp.com/login', exp: 1670316867}
             return {
                 ...state,
                 token: action.payload,

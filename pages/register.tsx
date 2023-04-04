@@ -17,18 +17,21 @@ function Register() {
 
   const register = async () => {
     setLoading(true);
-    const response = await fetch("http://localhost:8080/" + `api/register`, {
-      method: "POST",
-      // mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        name: userName,
-        email: email,
-        password: password,
-      }),
-    });
+    const response = await fetch(
+      "https://botzone.herokuapp.com/" + `api/register`,
+      {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          name: userName,
+          email: email,
+          password: password,
+        }),
+      }
+    );
     try {
       data = await response.json();
       if (data.code == 0) {
