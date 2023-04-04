@@ -1,19 +1,22 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import ProductGrid from "../components/ProductGrid";
+
 import AppleIcon from "@mui/icons-material/Apple";
 import Layout from "../components/Layout";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 import { contextType, Products } from "../interface";
 import Carousel from "../components/Carousel";
-import iphoneImageImport from "../assets/typeImages/iphone";
-import ipadImageImport from "../assets/typeImages/ipad";
-import macImageImport from "../assets/typeImages/mac";
-import { iphone, ipad, mac } from "../assets/imageLink/imageLink";
+import {
+  iphone,
+  ipad,
+  mac,
+  watch,
+  accessory,
+} from "../assets/imageLink/imageLink";
+import ProductList from "../components/ProductList";
 
 export const getStaticPaths = async () => {
-  const res = await fetch(process.env.beurl + "api/product");
+  const res = await fetch("http://localhost:8080/" + "api/product");
   const data = await res.json();
 
   const temppaths = data.data.map((a: Products) => {
@@ -58,12 +61,17 @@ export const getStaticProps = async (context: contextType) => {
     case "watch":
       productType = "Watch";
       break;
+    case "accessory":
+      productType = "Accessory";
+      break;
     default:
       productType = "Error";
       break;
   }
 
-  const res = await fetch(process.env.beurl + `api/product/type/` + type);
+  const res = await fetch(
+    "http://localhost:8080/" + `api/product/type/` + type
+  );
   const data = await res.json();
 
   let typeList = [...new Set(data.data.map((dat: Products) => dat.model))];
@@ -86,55 +94,6 @@ function Type({
   typeList: string[];
   productType: string;
 }) {
-  const [type, setType] = useState("Tất cả");
-  const [order, setOrder] = useState("Mới");
-  const [orderScreen, setOrderScreen] = useState<boolean>(false);
-  const [productData, setProductData] = useState<Products[]>();
-
-  const sortProduct = (orderType: string) => {
-    if (orderType == "Mới") {
-      setProductData(
-        product.sort(function (a: Products, b: Products) {
-          if (a.name > b.name) return -1;
-          if (a.name < b.name) return 1;
-          return 0;
-        })
-      );
-    } else if (orderType == "Giá cao đến thấp")
-      setProductData(
-        product.sort(function (a: Products, b: Products) {
-          if (a.price[0] > b.price[0]) return -1;
-          if (a.price[0] < b.price[0]) return 1;
-          return 0;
-        })
-      );
-    else if (orderType == "Giá thấp đến cao")
-      setProductData(
-        product.sort(function (a: Products, b: Products) {
-          if (a.price[0] < b.price[0]) return -1;
-          if (a.price[0] > b.price[0]) return 1;
-          return 0;
-        })
-      );
-  };
-
-  useEffect(() => {
-    if (!typeList.includes(type)) {
-      setType("Tất cả");
-    }
-    if (type !== "Tất cả") {
-      let filteredProduct = product.filter(
-        (pro: Products) => pro.model === type
-      );
-      setProductData(filteredProduct);
-    } else {
-      setProductData(product);
-    }
-    return () => {
-      setOrderScreen(false);
-    };
-  }, [type, product]);
-
   return (
     <div>
       <Head>
@@ -157,97 +116,15 @@ function Type({
                   ? iphone
                   : productType == "Mac"
                   ? mac
-                  : ipad
+                  : productType == "iPad"
+                  ? ipad
+                  : productType == "Watch"
+                  ? watch
+                  : accessory
               }
             ></Carousel>
           </div>
-          <div className="w-4/5 m-auto py-5 flex justify-start ">
-            <ul className="flex child:mr-6 child:mt-2 flex-wrap">
-              <li
-                onClick={() => setType("Tất cả")}
-                className={
-                  type == "Tất cả"
-                    ? "cursor-pointer border-b border-b-white"
-                    : "cursor-pointer"
-                }
-              >
-                Tất cả
-              </li>
-              {typeList.map((typelist) => (
-                <li
-                  className={
-                    type == typelist
-                      ? "cursor-pointer border-b border-b-white"
-                      : "cursor-pointer"
-                  }
-                  key={typelist}
-                  onClick={() => setType(typelist)}
-                >
-                  {typelist}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <div
-              onClick={() => {
-                setOrderScreen((prev) => !prev);
-              }}
-              className="w-4/5 justify-end flex m-auto cursor-pointer relative select-none mb-3"
-            >
-              <div>Xếp theo: {order}</div>
-              <div>
-                {orderScreen ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </div>
-              {orderScreen && (
-                <div className="absolute top-[110%] right-0 bg-white rounded-2xl text-black px-5 mt-3 z-50 ">
-                  <ul className="space-y-2 py-3">
-                    <li
-                      onClick={() => {
-                        sortProduct("Mới");
-                        setOrder("Mới");
-                      }}
-                    >
-                      Mới
-                    </li>
-                    {/* <li onClick={() => setOrder("Bán chạy")}>Bán chạy</li> */}
-                    <li
-                      onClick={() => {
-                        sortProduct("Giá thấp đến cao");
-                        setOrder("Giá thấp đến cao");
-                      }}
-                    >
-                      Giá thấp đến cao
-                    </li>
-                    <li
-                      onClick={() => {
-                        sortProduct("Giá cao đến thấp");
-                        setOrder("Giá cao đến thấp");
-                      }}
-                    >
-                      Giá cao đến thấp
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto gap-y-5">
-              {productData &&
-                productData.map((product) => (
-                  <ProductGrid
-                    key={product.id}
-                    id={product.id}
-                    image={product.img[0]}
-                    name={product.name + " " + product.optionToBuy[0]}
-                    price={product.price[0]}
-                  />
-                ))}
-            </div>
-          </div>
+          <ProductList product={product} typeList={typeList}></ProductList>
         </div>
       </Layout>
     </div>

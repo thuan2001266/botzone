@@ -10,6 +10,8 @@ import {
     REMOVE_FROM_CART,
     ADD_CART,
     SET_TYPE,
+    SET_FULL_PAGE_LAYER,
+    SET_CRUD_ACTION
 } from "./constrants";
 const initState = {
     type: "",
@@ -20,6 +22,26 @@ const initState = {
     token: "",
     refreshToken: "",
     info: "",
+    pageLayer: false,
+    crud: {
+        create: false,
+        delete: false,
+        update: false,
+        productId: -1,
+        execute: false,
+        productInfo: {
+                id: "",
+                name: "",
+                price: [],
+                color: [],
+                img: [],
+                optionToBuy: [],
+                discount: "",
+                date: -1,
+                type: "",
+                model: "",
+        }
+    }
 };
 
 function reducer(state, action) {
@@ -98,6 +120,11 @@ function reducer(state, action) {
             };
         case CLEAR_CART:
             return { ...state, cart: [] };
+        case SET_FULL_PAGE_LAYER:
+            return { ...state, pageLayer: action.payload };
+        case SET_CRUD_ACTION:
+            return {...state, crud: action.payload}
+
     }
 }
 

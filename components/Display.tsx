@@ -70,6 +70,30 @@ function Display({ type, data }: info) {
         ipadQuery.scrollLeft += ipadQuery.offsetWidth;
       }
     });
+    document.querySelector("#prevwatch")?.addEventListener("click", () => {
+      let ipadQuery = document.querySelector("#swatch") as HTMLElement;
+      if (ipadQuery != undefined && ipadQuery != null) {
+        ipadQuery.scrollLeft -= ipadQuery.offsetWidth;
+      }
+    });
+    document.querySelector("#nextwatch")?.addEventListener("click", () => {
+      let ipadQuery = document.querySelector("#swatch") as HTMLElement;
+      if (ipadQuery != undefined && ipadQuery != null) {
+        ipadQuery.scrollLeft += ipadQuery.offsetWidth;
+      }
+    });
+    document.querySelector("#prevaccessory")?.addEventListener("click", () => {
+      let ipadQuery = document.querySelector("#saccessory") as HTMLElement;
+      if (ipadQuery != undefined && ipadQuery != null) {
+        ipadQuery.scrollLeft -= ipadQuery.offsetWidth;
+      }
+    });
+    document.querySelector("#nextaccessory")?.addEventListener("click", () => {
+      let ipadQuery = document.querySelector("#saccessory") as HTMLElement;
+      if (ipadQuery != undefined && ipadQuery != null) {
+        ipadQuery.scrollLeft += ipadQuery.offsetWidth;
+      }
+    });
   }, []);
 
   return (
@@ -86,7 +110,15 @@ function Display({ type, data }: info) {
         <div
           className="flex m-auto mt-7 sm:overflow-x-scroll flex-wrap sm:flex-nowrap"
           id={
-            type == "iPhone" ? "siphone" : type == "Macbook" ? "smac" : "sipad"
+            type == "iPhone"
+              ? "siphone"
+              : type == "Macbook"
+              ? "smac"
+              : type == "iPad"
+              ? "sipad"
+              : type == "Watch"
+              ? "swatch"
+              : "saccessory"
           }
         >
           {productData &&
@@ -119,7 +151,11 @@ function Display({ type, data }: info) {
               ? "previphone"
               : type == "Macbook"
               ? "prevmac"
-              : "previpad"
+              : type == "iPad"
+              ? "previpad"
+              : type == "Watch"
+              ? "prevwatch"
+              : "prevaccessory"
           }
         >
           <ArrowBackIcon />
@@ -131,7 +167,11 @@ function Display({ type, data }: info) {
               ? "nextiphone"
               : type == "Macbook"
               ? "nextmac"
-              : "nextipad"
+              : type == "iPad"
+              ? "nextipad"
+              : type == "Watch"
+              ? "nextwatch"
+              : "nextaccessory"
           }
         >
           <ArrowForwardIcon />

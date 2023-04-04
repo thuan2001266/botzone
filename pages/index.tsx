@@ -9,7 +9,7 @@ import React from "react";
 import { home } from "../assets/imageLink/imageLink";
 
 export async function getServerSideProps() {
-  const result = await fetch(process.env.beurl + `api/product`);
+  const result = await fetch("http://localhost:8080/" + `api/product`);
   const data = await result.json();
   return { props: { products: data.data } };
 }
@@ -27,6 +27,9 @@ const Home = ({ products }: { products: Products[] }) => {
   const watch = products.filter((e: Products) => {
     return e.type == "watch";
   });
+  const accessory = products.filter((e: Products) => {
+    return e.type == "accessory";
+  });
 
   return (
     <Layout>
@@ -42,7 +45,8 @@ const Home = ({ products }: { products: Products[] }) => {
         <Display type="iPhone" data={iphone} />
         <Display type="Macbook" data={macbook} />
         <Display type="iPad" data={ipad} />
-        {/* <Display type="Watch" data={watch} /> */}
+        <Display type="Watch" data={watch} />
+        <Display type="Accessory" data={accessory} />
       </React.Fragment>
     </Layout>
   );

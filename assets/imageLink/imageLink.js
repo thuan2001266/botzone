@@ -45,6 +45,26 @@ const ipad = {
             "https://cdn.tgdd.vn/2023/02/banner/iPad10-680-680-680x680.png",
         ]
     }
+const watch = {
+        big: [
+            "https://cdn.tgdd.vn/2023/02/banner/AW-S8-2400-600-1920x480.png",
+            "https://cdn.tgdd.vn/2023/02/banner/Watch-SE-2400-600-1920x480.png",
+        ], 
+        small: [
+            "https://cdn.tgdd.vn/2023/02/banner/AW-S8-680-680-680x680.png",
+            "https://cdn.tgdd.vn/2023/02/banner/Watch-SE-680-680-680x680.png",
+        ]
+    }
+const accessory = {
+        big: [
+            "https://cdn.tgdd.vn/2023/03/banner/Magic-Keyboard-2400-600-1920x480.png",
+            "https://cdn.tgdd.vn/2023/02/banner/oplung-2400-600-1920x480.png",
+        ], 
+        small: [
+            "https://cdn.tgdd.vn/2023/03/banner/Magic-Keyboard-680-680-680x680.png",
+            "https://cdn.tgdd.vn/2023/02/banner/oplung-680-680-680x680.png",
+        ]
+    }
 
 
-export {home, iphone, mac, ipad}
+export {home, iphone, mac, ipad, watch, accessory}

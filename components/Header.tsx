@@ -8,29 +8,35 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useStore, actions } from "../store";
 import { useRouter } from "next/router";
-import { Products, receipt, toCart } from "../interface";
-import Receipt from "./Receipt";
+
 function Header() {
   const router = useRouter();
   const [userMenu, setUserMenu] = useState(false);
   const [history, setHistory] = useState(false);
-  const [historyData, setHistoryData] = useState<Array<receipt>>();
-  const [listProductId, setListProductId] = useState<Array<string>>([]);
-  const [receiptProducts, setReceiptProducts] = useState<Array<Products>>();
   const [state, dispatch] = useStore();
   const [searchVisibility, setSearchVisibility] = useState(false);
-
+  const [isMounted, setIsMounted] = useState(false);
   let logoV = Object.values(logo);
 
-  // console.log(new Date().getTime());
+  useEffect(() => {
+    setIsMounted(true);
+  }, [searchVisibility]);
+
+  useEffect(() => {
+    setSearchVisibility(state.pageLayer);
+  }, [state.pageLayer]);
 
   const searchClick = () => {
     setSearchVisibility((prev) => !prev);
+    dispatch(actions.setSearch(""));
+    dispatch(actions.setPageLayer(!state.pageLayer));
+    setIsMounted(false);
   };
 
   const reloadPage = () => {
     dispatch(actions.setType(""));
     dispatch(actions.setReload(!state.reload));
+    dispatch(actions.setPageLayer(false));
     router.push("/search");
   };
 
@@ -44,20 +50,28 @@ function Header() {
   return (
     <div className="bg-[#101010] ">
       <div className="relative">
+        {/* search bar  */}
         {searchVisibility && (
-          <div className="absolute bg-[#030303] w-full h-full z-10 flex content-center justify-center m-auto left-0 right-0">
-            <div className="w-1/2 m-auto flex">
+          <div className="absolute bg-[#030303] w-full h-full z-50 flex content-center justify-center m-auto left-0 right-0">
+            <div className="w-[80%] md:w-[60%] m-auto flex">
               <div>
-                <div onClick={reloadPage}>
+                <div
+                  onClick={reloadPage}
+                  className="hover:scale-110 transition-all"
+                >
                   <SearchIcon className="cursor-pointer" />
                 </div>
               </div>
               <input
                 type="text"
-                className="bg-[#3e3e3f] text-white py-1 flex-1 rounded-2xl cursor-pointer mx-3 px-3 border-none outline-0"
+                placeholder="Tìm kiếm sản phẩm"
+                className="placeholder:text-[#999]  transition-width duration-500 ease-in-out bg-black text-white py-1 flex-1 rounded-xl cursor-text mx-3 px-3 border-none outline-0"
                 onChange={(e) => dispatch(actions.setSearch(e.target.value))}
               />
-              <div onClick={searchClick}>
+              <div
+                onClick={searchClick}
+                className="hover:scale-110 transition-all"
+              >
                 <CloseIcon className="cursor-pointer" />
               </div>
             </div>
@@ -87,11 +101,21 @@ function Header() {
                   }}
                   className={
                     state.type == "iphone"
-                      ? "hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-                      : "hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
+                      ? `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-150 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                      : `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-150 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
                   }
                 >
-                  <div>iPhone</div>
+                  <div className="group-hover:scale-110 transition-all">
+                    iPhone
+                  </div>
                 </li>
               </Link>
               <Link href="/mac">
@@ -101,11 +125,21 @@ function Header() {
                   }}
                   className={
                     state.type == "mac"
-                      ? "hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-                      : "hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
+                      ? `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-300 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                      : `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-300 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
                   }
                 >
-                  Mac
+                  <div className="group-hover:scale-110 transition-all">
+                    Mac
+                  </div>
                 </li>
               </Link>
               <Link href="/ipad">
@@ -115,25 +149,88 @@ function Header() {
                   }}
                   className={
                     state.type == "ipad"
-                      ? "hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-                      : "hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
+                      ? `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-500 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                      : `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-500 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
                   }
                 >
-                  iPad
+                  <div className="group-hover:scale-110 transition-all">
+                    iPad
+                  </div>
+                </li>
+              </Link>
+              <Link href="/watch">
+                <li
+                  onClick={() => {
+                    dispatch(actions.setType("watch"));
+                  }}
+                  className={
+                    state.type == "watch"
+                      ? `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-700 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                      : `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-700 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                  }
+                >
+                  <div className="group-hover:scale-110 transition-all">
+                    Watch
+                  </div>
+                </li>
+              </Link>
+              <Link href="/accessory">
+                <li
+                  onClick={() => {
+                    dispatch(actions.setType("accessory"));
+                  }}
+                  className={
+                    state.type == "accessory"
+                      ? `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-1000 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                      : `${
+                          isMounted
+                            ? "opacity-100 translate-y-0 transition-all duration-1000 ease-out"
+                            : "opacity-0 translate-y-4"
+                        }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                  }
+                >
+                  <div className="group-hover:scale-110 transition-all">
+                    Accessory
+                  </div>
                 </li>
               </Link>
             </ul>
           </div>
           <div className="space-x-3 flex items-center">
             <div
-              className="cursor-pointer bg-[#2f3033] h-fit rounded-full p-[6px] hover:bg-[#5e5e60]"
+              className="cursor-pointer bg-[#2f3033] h-fit rounded-full p-[6px] hover:bg-[#5e5e60] hover:scale-110 transition-all"
               onClick={searchClick}
             >
               <SearchIcon />
             </div>
             <Link href={"/cart"}>
-              <div className="cursor-pointer bg-[#2f3033] h-fit rounded-full p-[6px] hover:bg-[#5e5e60] relative">
-                <LocalMallIcon />
+              <div
+                onClick={() => dispatch(actions.setType(""))}
+                className="cursor-pointer bg-[#2f3033] h-fit rounded-full p-[6px] hover:bg-[#5e5e60] relative group "
+              >
+                <div className="group-hover:scale-110 transition-all">
+                  <LocalMallIcon />
+                </div>
 
                 {state.cart.length > 0 ? (
                   <div className="absolute bottom-[-6px] right-[-6px] bg-red-500 w-[23px] h-[23px] rounded-full text-center bg-opacity-80">
@@ -163,7 +260,12 @@ function Header() {
                       <ul className="space-y-2 py-3 text-white">
                         {state.info.roles.includes("ROLE_ADMIN") ? (
                           <Link href={"/manage"}>
-                            <li className="cursor-pointer">Quản lý</li>
+                            <li
+                              className="cursor-pointer"
+                              onClick={() => dispatch(actions.setType(""))}
+                            >
+                              Quản lý
+                            </li>
                           </Link>
                         ) : (
                           <>
@@ -187,7 +289,9 @@ function Header() {
                         )}
                         <li
                           className="cursor-pointer"
-                          onClick={() => dispatch(actions.setToken(""))}
+                          onClick={() => {
+                            dispatch(actions.setToken(""));
+                          }}
                         >
                           Đăng xuất
                         </li>
@@ -203,59 +307,139 @@ function Header() {
                 </div>
               ) : (
                 <Link href={"/login"}>
-                  <div className="cursor-pointer">Login</div>
+                  <div className="cursor-pointer hover:scale-110 transition-all">
+                    Login
+                  </div>
                 </Link>
               )}
             </div>
           </div>
         </div>
       </div>
-      <div className="md:hidden flex justify-around">
-        <ul className="flex mb-0 pb-0 h-full m-auto">
-          <Link href="/iphone">
-            <li
-              onClick={() => {
-                dispatch(actions.setType("iphone"));
-              }}
-              className={
-                state.type == "iphone"
-                  ? "hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-                  : "hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-              }
-            >
-              <div>iPhone</div>
-            </li>
-          </Link>
-          <Link href="/mac">
-            <li
-              onClick={() => {
-                dispatch(actions.setType("mac"));
-              }}
-              className={
-                state.type == "mac"
-                  ? "hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-                  : "hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-              }
-            >
-              Mac
-            </li>
-          </Link>
-          <Link href="/ipad">
-            <li
-              onClick={() => {
-                dispatch(actions.setType("ipad"));
-              }}
-              className={
-                state.type == "ipad"
-                  ? "hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-                  : "hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center"
-              }
-            >
-              iPad
-            </li>
-          </Link>
-        </ul>
-      </div>
+      {searchVisibility ? (
+        ""
+      ) : (
+        <div className="md:hidden flex justify-around">
+          <ul className="flex mb-0 pb-0 h-full m-auto">
+            <Link href="/iphone">
+              <li
+                onClick={() => {
+                  dispatch(actions.setType("iphone"));
+                }}
+                className={
+                  state.type == "iphone"
+                    ? `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-150 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                    : `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-150 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                }
+              >
+                <div className="group-hover:scale-110 transition-all">
+                  iPhone
+                </div>
+              </li>
+            </Link>
+            <Link href="/mac">
+              <li
+                onClick={() => {
+                  dispatch(actions.setType("mac"));
+                }}
+                className={
+                  state.type == "mac"
+                    ? `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-300 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                    : `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-300 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                }
+              >
+                <div className="group-hover:scale-110 transition-all">Mac</div>
+              </li>
+            </Link>
+            <Link href="/ipad">
+              <li
+                onClick={() => {
+                  dispatch(actions.setType("ipad"));
+                }}
+                className={
+                  state.type == "ipad"
+                    ? `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-500 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                    : `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-500 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                }
+              >
+                <div className="group-hover:scale-110 transition-all">iPad</div>
+              </li>
+            </Link>
+            <Link href="/watch">
+              <li
+                onClick={() => {
+                  dispatch(actions.setType("watch"));
+                }}
+                className={
+                  state.type == "watch"
+                    ? `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-700 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                    : `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-700 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                }
+              >
+                <div className="group-hover:scale-110 transition-all">
+                  Watch
+                </div>
+              </li>
+            </Link>
+            <Link href="/accessory">
+              <li
+                onClick={() => {
+                  dispatch(actions.setType("accessory"));
+                }}
+                className={
+                  state.type == "accessory"
+                    ? `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-1000 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                    : `${
+                        isMounted
+                          ? "opacity-100 translate-y-0 transition-all duration-1000 ease-out"
+                          : "opacity-0 translate-y-4"
+                      }group hover:bg-[#2d2d2d] py-4 px-5 cursor-pointer h-full grid place-items-center`
+                }
+              >
+                <div className="group-hover:scale-110 transition-all">
+                  Accessory
+                </div>
+              </li>
+            </Link>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

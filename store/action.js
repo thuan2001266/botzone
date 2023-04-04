@@ -10,6 +10,8 @@ import {
     REMOVE_FROM_CART,
     ADD_CART,
     SET_TYPE,
+    SET_FULL_PAGE_LAYER,
+    SET_CRUD_ACTION
 } from "./constrants";
 
 export const setType = (payload) => ({
@@ -65,5 +67,15 @@ export const setRefreshToken = (payload) => ({
 
 export const clearCart = (payload) => ({
     type: CLEAR_CART,
+    payload,
+});
+
+export const setPageLayer = (payload) => ({
+    type: SET_FULL_PAGE_LAYER,
+    payload,
+});
+
+export const setCRUDAction = (payload) => ({
+    type: SET_CRUD_ACTION,
     payload,
 });

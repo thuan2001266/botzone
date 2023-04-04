@@ -1,15 +1,8 @@
-import {
-  JSXElementConstructor,
-  ReactElement,
-  useEffect,
-  useState,
-} from "react";
-import { LayoutRouteProps } from "react-router-dom";
-import Footer from "./Footer";
+import { ReactElement, useEffect, useState } from "react";
 import Header from "./Header";
 import { useStore, actions } from "../store";
 
-function Layout({ children }: { children: ReactElement }) {
+function LayoutHeader({ children }: { children: ReactElement }) {
   const [state, dispatch] = useStore();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -23,24 +16,6 @@ function Layout({ children }: { children: ReactElement }) {
         onClick={() => {
           dispatch(actions.setSearch(""));
           dispatch(actions.setPageLayer(!state.pageLayer));
-          dispatch(
-            actions.setCRUDAction({
-              ...state.crud,
-              execute: false,
-              productInfo: {
-                id: "",
-                name: "",
-                price: [],
-                color: [],
-                img: [],
-                optionToBuy: [],
-                discount: "",
-                date: -1,
-                type: "",
-                model: "",
-              },
-            })
-          );
         }}
         className={`absolute w-full h-full bg-[#0c0c0d] z-40 ${
           isMounted
@@ -50,9 +25,8 @@ function Layout({ children }: { children: ReactElement }) {
       ></div>
       <Header></Header>
       {children}
-      <Footer></Footer>
     </div>
   );
 }
 
-export default Layout;
+export default LayoutHeader;

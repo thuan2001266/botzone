@@ -21,10 +21,18 @@
   display: none;
 }
 
+#swatch::-webkit-scrollbar {
+  display: none;
+}
+
+#saccessory::-webkit-scrollbar {
+  display: none;
+}
+
 #imageSlider::-webkit-scrollbar {
   display: none;
 }
 
-#siphone, #smac, #sipad, #imageSlider {
+#siphone, #smac, #sipad, #swatch, #saccessory,  #imageSlider {
   scroll-behavior: smooth;
 }

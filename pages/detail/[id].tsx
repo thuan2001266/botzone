@@ -6,7 +6,7 @@ import { ProductItem, Products, toCart } from "../../interface";
 import { useStore, actions } from "../../store";
 import Image from "next/image";
 export const getStaticPaths = async () => {
-  const res = await fetch(process.env.beurl + "api/product");
+  const res = await fetch("http://localhost:8080/" + "api/product");
   const data = await res.json();
   const paths = data.data.map((a: Products) => {
     return {
@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: { params: { id: string } }) => {
   const id = context.params.id;
-  const res = await fetch(process.env.beurl + "api/product/" + id);
+  const res = await fetch("http://localhost:8080/" + "api/product/" + id);
   const data = await res.json();
   return {
     props: { product: data.data[0] },
@@ -64,34 +64,42 @@ function Detail({ product }: ProductItem) {
                 {product.price[infoToCart.spec]}₫
               </h2>
               <div>
-                <div className="my-3 flex">
-                  Dung lượng:
-                  <div className="font-semibold ml-2">
-                    {product.optionToBuy[infoToCart.spec]}
-                  </div>
-                </div>
-                <div>
-                  <ul className="space-x-2 flex">
-                    {product.optionToBuy.map((opt) => (
-                      <li
-                        key={opt}
-                        onClick={() =>
-                          setInfoToCart((prev) => ({
-                            ...prev,
-                            spec: product.optionToBuy.indexOf(opt),
-                          }))
-                        }
-                        className={
-                          product.optionToBuy.indexOf(opt) == infoToCart.spec
-                            ? "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#2f3033]"
-                            : "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#4c4c53] text-[#a9a9a9]"
-                        }
-                      >
-                        {opt}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {product.optionToBuy.length > 0 &&
+                product.optionToBuy[0] != "" ? (
+                  <>
+                    <div className="my-3 flex">
+                      Tùy chọn:
+                      <div className="font-semibold ml-2">
+                        {product.optionToBuy[infoToCart.spec]}
+                      </div>
+                    </div>
+                    <div>
+                      <ul className="space-x-2 flex">
+                        {product.optionToBuy.map((opt) => (
+                          <li
+                            key={opt}
+                            onClick={() =>
+                              setInfoToCart((prev) => ({
+                                ...prev,
+                                spec: product.optionToBuy.indexOf(opt),
+                              }))
+                            }
+                            className={
+                              product.optionToBuy.indexOf(opt) ==
+                              infoToCart.spec
+                                ? "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#2f3033]"
+                                : "cursor-pointer border border-[#615f5f] p-2 rounded-lg  bg-[#4c4c53] text-[#a9a9a9]"
+                            }
+                          >
+                            {opt}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
               <div>
                 <div className="my-3 flex">

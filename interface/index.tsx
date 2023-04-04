@@ -86,3 +86,11 @@ export interface contextType {
 export interface typeString {
   type: string;
 }
+
+export interface TypeVar {
+  iphone: string[];
+  mac: string[];
+  ipad: string[];
+  watch: string[];
+  accessory: string[];
+}

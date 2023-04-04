@@ -10,10 +10,11 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [messageChange, setMessageChange] = useState(false);
   const router = useRouter();
   let data;
   const loginAut = async () => {
-    const response = await fetch("https://botzone.herokuapp.com/" + `login`, {
+    const response = await fetch("http://localhost:8080/" + `login`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -29,14 +30,23 @@ function Login() {
       if (data.access_token) {
         dispatch(actions.setToken(data.access_token));
         dispatch(actions.setRefreshToken(data.refresh_token));
+        dispatch(actions.setType("asdasdasd"));
         router.push("/");
       } else {
         setMessage(data.message);
+        setMessageChange((prev) => !prev);
       }
     } catch (e) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    const myTimeout = setTimeout(() => {
+      setMessage("");
+    }, 7500);
+    return () => clearTimeout(myTimeout);
+  }, [messageChange]);
 
   let logoV = Object.values(logo);
 
@@ -59,7 +69,7 @@ function Login() {
               />
             </div>
           </Link>
-          <div className=" md:w-[520px] bg-[#323232] m-auto rounded-xl p-5 shadow-2xl mt-4">
+          <div className="md:w-[520px] max-w-[96%] bg-[#323232] m-auto rounded-xl p-5 shadow-2xl mt-4">
             <h2 className="font-medium text-4xl text-center">Login</h2>
             <form action="" className="space-y-4 mt-6">
               <div className="flex flex-col md:flex-row">
@@ -100,8 +110,11 @@ function Login() {
                   </div>
                 </Link>
               </div>
-              <div className="flex"></div>
-              {message && <div className="text-red-600">{message}</div>}
+              {message && (
+                <div className="text-red-600 w-full flex justify-center">
+                  <div>{message}</div>
+                </div>
+              )}
               <div
                 className="m-auto flex items-center justify-center py-2 rounded-2xl mt-3 bg-[#0071e3] cursor-pointer "
                 onClick={loginAut}

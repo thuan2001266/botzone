@@ -40,7 +40,7 @@ function TypeList() {
           <div>iPad</div>
         </div>
       </Link>
-      {/* <Link href={"/watch"}>
+      <Link href={"/watch"}>
         <div className="flex flex-col items-center pt-7 pb-4 pl-4 pr-4 bg-[#323232] rounded-lg m-2 ">
           <div className="w-[170px]">
             <img
@@ -51,7 +51,19 @@ function TypeList() {
           </div>
           <div>Watch</div>
         </div>
-      </Link> */}
+      </Link>
+      <Link href={"/watch"}>
+        <div className="flex flex-col items-center pt-7 pb-4 pl-4 pr-4 bg-[#323232] rounded-lg m-2 ">
+          <div className="w-[170px]">
+            <img
+              src={pngs[4].src}
+              alt=""
+              className="object-contain h-[125px] object-bottom m-auto max-w-[85%]"
+            />
+          </div>
+          <div>Accessory</div>
+        </div>
+      </Link>
     </div>
   );
 }

@@ -13,7 +13,7 @@ function Detail() {
         const fetchResult = async () => {
             if (state.search != "") {
                 const result = await fetch(
-                    "https://botzone.herokuapp.com/" +`api/product/search/` + state.search,
+                    "http://localhost:8080/" +`api/product/search/` + state.search,
                     {
                         method: "GET",
                         mode: "cors",
@@ -43,8 +43,16 @@ function Detail() {
                 setProductBySearch(data.data);
             }
         };
-
-        fetchResult();
+        if (state.search != "") {
+            fetchResult();
+        } else {
+            dispatch(
+                actions.setSearchMessage(
+                    "Vui lòng nhập tên sản phẩm cần tìm"
+                )
+            );
+        }
+        
     }, [state.reload]);
     return (
         <Layout>
@@ -57,7 +65,7 @@ function Detail() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="pt-5">
+            <div className="py-7">
                 <div className="flex justify-center items-center">
                     <h2 className="text-4xl">{}</h2>
                 </div>

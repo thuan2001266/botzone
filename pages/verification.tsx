@@ -1,12 +1,22 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 function Verification() {
   const router = useRouter();
   const [result, setResult] = useState("");
-  // const [token, setToken] = useState("");
+  const [countDownToLogin, setCountDownToLogin] = useState(5);
 
-  // if (router.isReady) console.log(router.query);
+  useEffect(() => {
+    let i = 5;
+    const myTimeout = setInterval(() => {
+      i -= 1;
+      setCountDownToLogin(i);
+      if (i == 0) {
+        clearInterval(myTimeout);
+      }
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     if (router.isReady) {
@@ -14,7 +24,7 @@ function Verification() {
       const tempToken = token + "";
       const verificate = async () => {
         const result = await fetch(
-          "https://botzone.herokuapp.com/" + `api/verificate`,
+          "http://localhost:8080/" + `api/verificate`,
           {
             method: "POST",
             mode: "cors",
@@ -35,7 +45,14 @@ function Verification() {
     }
   }, [router.isReady]);
 
-  return <div className="text-lg text-white">{result}</div>;
+  return (
+    <div className="w-full h-screen grid place-items-center">
+      <div className="text-lg text-white">
+        {result}, chuyển đến trang <Link href="/login">đăng nhập</Link> sau{" "}
+        {countDownToLogin}
+      </div>
+    </div>
+  );
 }
 
 export default Verification;
