@@ -3,11 +3,56 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import ProductGrid from "../components/ProductGrid";
 import { actions, useStore } from "../store";
+import ProductList from "../components/ProductList";
 
 function Detail() {
     const [state, dispatch] = useStore();
     const [productBySearch, setProductBySearch] = useState([]);
+    let typeListAll = [];
     let message = state.search;
+    if (productBySearch) {
+        productBySearch.map((e) => {
+            if (!typeListAll.includes(e.model)) typeListAll.push(e.model)
+          });
+    }
+
+    const typeVar = {
+    iphone: [],
+    mac: [],
+    ipad: [],
+    watch: [],
+    accessory: [],
+    };
+    if (productBySearch) {
+    productBySearch.map((e) => {
+    switch (e.type) {
+        case "iphone":
+        if (!typeVar.iphone.includes(e.model)) {
+            typeVar.iphone.push(e.model);
+        }
+        break;
+        case "mac":
+        if (!typeVar.mac.includes(e.model)) {
+            typeVar.mac.push(e.model);
+        }
+        break;
+        case "ipad":
+        if (!typeVar.ipad.includes(e.model)) {
+            typeVar.ipad.push(e.model);
+        }
+        break;
+        case "watch":
+        if (!typeVar.watch.includes(e.model)) {
+            typeVar.watch.push(e.model);
+        }
+        break;
+        case "accessory":
+        if (!typeVar.accessory.includes(e.model)) {
+            typeVar.accessory.push(e.model);
+        }
+        break;
+    }
+    });}
 
     useEffect(() => {
         const fetchResult = async () => {
@@ -83,7 +128,13 @@ function Detail() {
                             )}
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto gap-y-5">
+                    {productBySearch && <ProductList
+                    product={productBySearch}
+                    typeList={typeListAll}
+                    nolink={false}
+                    typeAndModel={typeVar}
+                    ></ProductList> }
+                    {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-4/5 m-auto gap-y-5">
                         {productBySearch ? (
                             productBySearch.map((product) => (
                                 <ProductGrid
@@ -102,7 +153,7 @@ function Detail() {
                                 <h2></h2>
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Layout>
