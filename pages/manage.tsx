@@ -9,7 +9,7 @@ import { ProductItem, Products, TypeVar } from "../interface";
 import { useStore, actions } from "../store";
 import { log } from "console";
 export async function getServerSideProps() {
-  const result = await fetch("https://botzone.herokuapp.com/" + `api/product`);
+  const result = await fetch("https://botzone.onrender.com/" + `api/product`);
   const data = await result.json();
   return { props: { products: data.data } };
 }
@@ -138,7 +138,7 @@ function Manage({ products }: { products: Products[] }) {
           // });
 
           const response = await fetch(
-            `https://botzone.herokuapp.com/api/manage/${popupType}Product`,
+            `https://botzone.onrender.com/api/manage/${popupType}Product`,
             {
               method: "POST",
               mode: "cors",
@@ -220,17 +220,16 @@ function Manage({ products }: { products: Products[] }) {
       const tempRef1: HTMLInputElement = ref.current;
       const tempRef2: HTMLInputElement = ref2.current;
       if (tempRef1.checked) {
-        destination =
-          "https://botzone.herokuapp.com/" + "api/manage/addProduct";
+        destination = "https://botzone.onrender.com/" + "api/manage/addProduct";
         method = "POST";
       } else {
         if (tempRef2.checked) {
           destination =
-            "https://botzone.herokuapp.com/" + "api/manage/updateProduct";
+            "https://botzone.onrender.com/" + "api/manage/updateProduct";
           method = "POST";
         } else {
           destination =
-            "https://botzone.herokuapp.com/" + "api/manage/deleteProduct";
+            "https://botzone.onrender.com/" + "api/manage/deleteProduct";
           method = "POST";
         }
       }
@@ -270,7 +269,7 @@ function Manage({ products }: { products: Products[] }) {
           data.error_message.includes("The Token has expired")
         ) {
           const refreshToken = await fetch(
-            "https://botzone.herokuapp.com/api/refreshToken",
+            "https://botzone.onrender.com/api/refreshToken",
             {
               method: "GET",
               mode: "cors",
@@ -288,7 +287,7 @@ function Manage({ products }: { products: Products[] }) {
             setMessage("Phiên đăng nhập vừa được làm mới!");
           }
         } else {
-          fetch("https://botzone.herokuapp.com/" + "api/product")
+          fetch("https://botzone.onrender.com/" + "api/product")
             .then((response) => response.json())
             .then((data) => setTheData(data.data));
         }
