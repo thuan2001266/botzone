@@ -8,7 +8,7 @@ module.exports = {
         return [
             {
                 source: "/api/:path*",
-                destination: "https://botzone.herokuapp.com/:path*",
+                destination: "https://botzone.onrender.com/:path*",
             },
         ];
     },

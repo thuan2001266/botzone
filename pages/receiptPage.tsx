@@ -15,7 +15,7 @@ function ReceiptPage() {
   useEffect(() => {
     const fetchCart = async () => {
       const response = await fetch(
-        "https://botzone.herokuapp.com/api/product/cart",
+        "https://botzone.onrender.com/api/product/cart",
         {
           method: "POST",
           mode: "cors",
@@ -41,7 +41,7 @@ function ReceiptPage() {
     if (state.info != "") {
       const fetchResult = async () => {
         const result = await fetch(
-          "https://botzone.herokuapp.com/" + `api/receipt/` + state.info.sub,
+          "https://botzone.onrender.com/" + `api/receipt/` + state.info.sub,
           {
             method: "GET",
             mode: "cors",

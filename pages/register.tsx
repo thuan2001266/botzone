@@ -18,7 +18,7 @@ function Register() {
   const register = async () => {
     setLoading(true);
     const response = await fetch(
-      "https://botzone.herokuapp.com/" + `api/register`,
+      "https://botzone.onrender.com/" + `api/register`,
       {
         method: "POST",
         // mode: "no-cors",

@@ -24,7 +24,7 @@ function Verification() {
       const tempToken = token + "";
       const verificate = async () => {
         const result = await fetch(
-          "https://botzone.herokuapp.com/" + `api/verificate`,
+          "https://botzone.onrender.com/" + `api/verificate`,
           {
             method: "POST",
             mode: "cors",

@@ -47,6 +47,17 @@ function Header() {
     }
   };
 
+  useEffect(() => {
+    const pokeBackend = async () => {
+      console.log("poke backend");
+      const result = await fetch(
+        "https://botzone.onrender.com/" + `api/product`
+      );
+      const data = await result.json();
+    };
+    setInterval(pokeBackend, 30 * 60 * 1000);
+  }, []);
+
   return (
     <div className="bg-[#101010] ">
       <div className="relative">
