@@ -9,7 +9,7 @@ import React from "react";
 import { home } from "../assets/imageLink/imageLink";
 
 export async function getServerSideProps() {
-  const result = await fetch("https://botzone.onrender.com/" + `api/product`);
+  const result = await fetch("https://botzone.herokuapp.com/" + `api/product`);
   const data = await result.json();
   return { props: { products: data.data } };
 }

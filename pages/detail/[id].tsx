@@ -6,7 +6,7 @@ import { ProductItem, Products, toCart } from "../../interface";
 import { useStore, actions } from "../../store";
 import Image from "next/image";
 export const getStaticPaths = async () => {
-  const res = await fetch("https://botzone.onrender.com/" + "api/product");
+  const res = await fetch("https://botzone.herokuapp.com/" + "api/product");
   const data = await res.json();
   const paths = data.data.map((a: Products) => {
     return {
@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: { params: { id: string } }) => {
   const id = context.params.id;
   const res = await fetch(
-    "https://botzone.onrender.com/" + "api/product/" + id
+    "https://botzone.herokuapp.com/" + "api/product/" + id
   );
   const data = await res.json();
   return {
