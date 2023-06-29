@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
+const cron = require('node-cron');
+cron.schedule('*/5 * * * *', () => {
+  const pokeBackend = async () => {
+        console.log("poke backend");
+        const result = await fetch(
+            "https://botzone.onrender.com/" + `api/product`
+        );
+        const data = await result.json();
+    };
+    pokeBackend()
+});
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
