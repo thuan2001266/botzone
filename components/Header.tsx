@@ -55,7 +55,8 @@ function Header() {
       );
       const data = await result.json();
     };
-    setInterval(pokeBackend, 30 * 60 * 1000);
+    const myInterval = setInterval(pokeBackend, 30 * 60 * 1000);
+    return () => clearInterval(myInterval);
   }, []);
 
   return (
